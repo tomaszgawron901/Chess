@@ -21,11 +21,6 @@ namespace ChessClassLibrary
             };
             this.killSet = this.moveSet;
         }
-
-        public override void firstMove()
-        {
-            this.isMoved = true;
-        }
     }
 
     class Queen : Piece
@@ -48,11 +43,6 @@ namespace ChessClassLibrary
             };
             this.killSet = this.moveSet;
         }
-
-        public override void firstMove()
-        {
-            this.isMoved = true;
-        }
     }
 
     public class Rook : Piece
@@ -69,11 +59,6 @@ namespace ChessClassLibrary
                 new Point(-1, 0)
             };
             this.killSet = this.moveSet;
-        }
-
-        public override void firstMove()
-        {
-            this.isMoved = true;
         }
     }
 }

@@ -39,6 +39,23 @@ namespace ChessClassLibrary
             return false;
         }
 
+        public override bool Equals(object other)
+        {
+            if (other is Point)
+            {
+                return Equals((Point)other);
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            var hashCode = 1502939027;
+            hashCode = hashCode * -1521134295 + x.GetHashCode();
+            hashCode = hashCode * -1521134295 + y.GetHashCode();
+            return hashCode;
+        }
+
         public Point Plue(Point other)
         {
             return new Point(X + other.X, Y + other.Y);
@@ -47,6 +64,16 @@ namespace ChessClassLibrary
         public Point Minus(Point other)
         {
             return new Point(X - other.X, Y - other.Y);
+        }
+
+        public static bool operator ==(Point p1, Point p2)
+        {
+            return p1.Equals(p2);
+        }
+
+        public static bool operator !=(Point p1, Point p2)
+        {
+            return !p1.Equals(p2);
         }
 
         public static Point operator +(Point left, Point right)

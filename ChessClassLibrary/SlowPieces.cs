@@ -60,11 +60,6 @@ namespace ChessClassLibrary
             this.killSet = this.moveSet;
 
         }
-
-        public override void firstMove()
-        {
-            this.isMoved = true;
-        }
     }
 
     public class King : Piece
@@ -80,12 +75,6 @@ namespace ChessClassLibrary
                 new Point(-1, -1), new Point(0, -1), new Point(1, -1),
             };
             this.killSet = this.moveSet;
-
-        }
-
-        public override void firstMove()
-        {
-            this.isMoved = true;
         }
     }
 

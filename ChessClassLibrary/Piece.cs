@@ -22,6 +22,14 @@ namespace ChessClassLibrary
         {
             get { return this.isMoved; }
         }
-        public virtual void firstMove() { }
+
+        public string Color
+        {
+            get { return color; }
+        }
+        public virtual void firstMove()
+        {
+            isMoved = true;
+        }
     }
 }
