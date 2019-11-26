@@ -8,8 +8,7 @@ namespace ChessClassLibrary
 {
     interface IPiece
     {
-        void moveTo(Point position);
-        void firstMoveTo(Point position);
+        void firstMove();
     }
 
     public abstract class Piece : IPiece
@@ -17,14 +16,12 @@ namespace ChessClassLibrary
         protected string color;
         protected bool isMoved;
         protected bool isFast;
-        protected Point position;
         protected Point[] moveSet;
         protected Point[] killSet;
         public bool IsMoved
         {
             get { return this.isMoved; }
         }
-        public virtual void moveTo(Point position) { }
-        public virtual void firstMoveTo(Point position) { }
+        public virtual void firstMove() { }
     }
 }
