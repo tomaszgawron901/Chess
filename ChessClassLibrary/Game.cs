@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChessClassLibrary
 {
-    class ChessBoard
+    public class ChessBoard
     {
         private int width = 8;
         private int height = 8;
@@ -63,6 +63,18 @@ namespace ChessClassLibrary
             if (!CoordinateIsInRange(position))
                 throw new ArgumentOutOfRangeException("Given position is out of chess board range.");
             return board[position.Y][position.X];
+        }
+
+        /// <summary>
+        /// Sets given Piece at given position.
+        /// </summary>
+        /// <param name="piece">Piece to set.</param>
+        /// <param name="position">Position.</param>
+        public void SetPiece(Piece piece, Point position)
+        {
+            if (!CoordinateIsInRange(position))
+                throw new ArgumentOutOfRangeException("Given position is out of chess board range.");
+            board[position.Y][position.X] = piece;
         }
 
         private Piece[][] create()
@@ -126,7 +138,7 @@ namespace ChessClassLibrary
         }
     }
 
-    class Game
+    public class Game
     {
         private ChessBoard chessBoard;
         private string playerColor;
@@ -140,31 +152,7 @@ namespace ChessClassLibrary
 
         public bool CanMove(Point from, Point to)// TODO ------------------- TODO ------------------------ TODO
         {
-            if (!chessBoard.CoordinateIsInRange(from) || !chessBoard.CoordinateIsInRange(to))
-                return false;
-            Piece p1 = chessBoard.GetPiece(from);
-            Piece p2 = chessBoard.GetPiece(to);
-            if (p1 == null)
-                return false;
-            if (p1.Color != playerColor)
-                return false;
-            
-            if(p2 != null)
-            {
-                if (p2.Color == p1.Color)
-                    return false;
-                else
-                {
-
-                }
-            }
-            else
-            {
-
-            }
-
-
-            return false;
+            throw new NotImplementedException();
         }
 
     }

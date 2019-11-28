@@ -12,15 +12,19 @@ namespace ChessClassLibrary
         public WhitePawn()
         {
             this.color = "White";
-            this.isMoved = false;
+            this.wasMoved = false;
             this.isFast = false;
+            this.name = "Pawn";
             this.moveSet = new Point[] { new Point(0,1), new Point(0, 2)};
             this.killSet = new Point[] { new Point(-1, 1), new Point(1, 1)};
         }
 
+        /// <summary>
+        /// Performs the appropriate actions when the piece is moving for the first time.
+        /// </summary>
         public override void firstMove()
         {
-            this.isMoved = true;
+            this.wasMoved = true;
             this.moveSet = new Point[] { new Point(0, 1)};
         }
     }
@@ -30,15 +34,19 @@ namespace ChessClassLibrary
         public BlackPawn()
         {
             this.color = "Black";
-            this.isMoved = false;
+            this.wasMoved = false;
             this.isFast = false;
+            this.name = "Pawn";
             this.moveSet = new Point[] { new Point(0, -1), new Point(0, -2) };
             this.killSet = new Point[] { new Point(-1, -1), new Point(1, -1) };
         }
 
+        /// <summary>
+        /// Performs the appropriate actions when the piece is moving for the first time.
+        /// </summary>
         public override void firstMove()
         {
-            this.isMoved = true;
+            this.wasMoved = true;
             this.moveSet = new Point[] { new Point(0, -1) };
         }
     }
@@ -49,8 +57,9 @@ namespace ChessClassLibrary
         public Knight(string color)
         {
             this.color = color;
-            this.isMoved = false;
+            this.wasMoved = false;
             this.isFast = false;
+            this.name = "Knight";
             this.moveSet = new Point[] { 
                 new Point(-1, 2), new Point(1, 2),
                 new Point(-1, -2), new Point(1, -2),
@@ -67,8 +76,9 @@ namespace ChessClassLibrary
         public King(string color)
         {
             this.color = color;
-            this.isMoved = false;
+            this.wasMoved = false;
             this.isFast = false;
+            this.name = "King";
             this.moveSet = new Point[] {
                 new Point(-1, 1), new Point(0, 1), new Point(1, 1),
                 new Point(-1, 0), new Point(1, 0),

@@ -11,8 +11,9 @@ namespace ChessClassLibrary
         public Bishop(string color)
         {
             this.color = color;
-            this.isMoved = false;
+            this.wasMoved = false;
             this.isFast = true;
+            this.name = "Bishop";
             this.moveSet = new Point[] {
                 new Point(-1, 1),
                 new Point(1, 1),
@@ -28,8 +29,9 @@ namespace ChessClassLibrary
         public Queen(string color)
         {
             this.color = color;
-            this.isMoved = false;
+            this.wasMoved = false;
             this.isFast = true;
+            this.name = "Queen";
             this.moveSet = new Point[] {
                 new Point(-1, 1),
                 new Point(1, 1),
@@ -50,8 +52,9 @@ namespace ChessClassLibrary
         public Rook(string color)
         {
             this.color = color;
-            this.isMoved = false;
+            this.wasMoved = false;
             this.isFast = true;
+            this.name = "Rook";
             this.moveSet = new Point[] {
                 new Point(0, 1),
                 new Point(1, 0),
