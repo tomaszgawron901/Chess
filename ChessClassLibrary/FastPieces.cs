@@ -6,14 +6,31 @@ using System.Threading.Tasks;
 
 namespace ChessClassLibrary
 {
-    public class Bishop : Piece
+    public abstract class FastPiece : Piece
     {
-        public Bishop(string color)
+        protected FastPiece(string color, string name, Point position, ChessBoard board) :
+            base(color, name, position, board)
         {
-            this.color = color;
-            this.wasMoved = false;
             this.isFast = true;
-            this.name = "Bishop";
+        }
+
+        public override bool canMoveTo(Point position)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void moveTo(Point position)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+
+    public class Bishop : FastPiece
+    {
+        public Bishop(string color, Point position, ChessBoard board):
+            base(color, "Bishop", position, board)
+        {
             this.moveSet = new Point[] {
                 new Point(-1, 1),
                 new Point(1, 1),
@@ -24,14 +41,11 @@ namespace ChessClassLibrary
         }
     }
 
-    class Queen : Piece
+    class Queen : FastPiece
     {
-        public Queen(string color)
+        public Queen(string color, Point position, ChessBoard board) :
+            base(color, "Queen", position, board)
         {
-            this.color = color;
-            this.wasMoved = false;
-            this.isFast = true;
-            this.name = "Queen";
             this.moveSet = new Point[] {
                 new Point(-1, 1),
                 new Point(1, 1),
@@ -47,14 +61,11 @@ namespace ChessClassLibrary
         }
     }
 
-    public class Rook : Piece
+    public class Rook : FastPiece
     {
-        public Rook(string color)
+        public Rook(string color, Point position, ChessBoard board) :
+            base(color, "Rook", position, board)
         {
-            this.color = color;
-            this.wasMoved = false;
-            this.isFast = true;
-            this.name = "Rook";
             this.moveSet = new Point[] {
                 new Point(0, 1),
                 new Point(1, 0),

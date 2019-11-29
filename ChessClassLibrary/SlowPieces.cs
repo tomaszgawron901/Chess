@@ -6,18 +6,33 @@ using System.Threading.Tasks;
 
 namespace ChessClassLibrary
 {
-
-    public class WhitePawn : Piece
+    public abstract class SlowPiece : Piece
     {
-        public WhitePawn()
+        protected SlowPiece(string color, string name, Point position, ChessBoard board) :
+            base(color, name, position, board)
         {
-            this.color = "White";
-            this.wasMoved = false;
             this.isFast = false;
-            this.name = "Pawn";
-            this.moveSet = new Point[] { new Point(0,1), new Point(0, 2)};
-            this.killSet = new Point[] { new Point(-1, 1), new Point(1, 1)};
         }
+
+        public override bool canMoveTo(Point position)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void moveTo(Point position)
+        {
+            throw new NotImplementedException();
+        }
+    }
+    public class WhitePawn : SlowPiece
+    {
+        public WhitePawn(Point position, ChessBoard board) :
+            base("White", "Pawn", position, board)
+        {
+            this.moveSet = new Point[] { new Point(0, 1), new Point(0, 2) };
+            this.killSet = new Point[] { new Point(-1, 1), new Point(1, 1) };
+        }
+
 
         /// <summary>
         /// Performs the appropriate actions when the piece is moving for the first time.
@@ -29,17 +44,15 @@ namespace ChessClassLibrary
         }
     }
 
-    public class BlackPawn: Piece
+    public class BlackPawn: SlowPiece
     {
-        public BlackPawn()
+        public BlackPawn(Point position, ChessBoard board) :
+            base("Black", "Pawn", position, board)
         {
-            this.color = "Black";
-            this.wasMoved = false;
-            this.isFast = false;
-            this.name = "Pawn";
             this.moveSet = new Point[] { new Point(0, -1), new Point(0, -2) };
             this.killSet = new Point[] { new Point(-1, -1), new Point(1, -1) };
         }
+
 
         /// <summary>
         /// Performs the appropriate actions when the piece is moving for the first time.
@@ -51,41 +64,20 @@ namespace ChessClassLibrary
         }
     }
 
-
-    public class Knight : Piece
+    public class Knight : SlowPiece
     {
-        public Knight(string color)
+        public Knight(string color, Point position, ChessBoard board) :
+            base(color, "Knight", position, board)
         {
-            this.color = color;
-            this.wasMoved = false;
-            this.isFast = false;
-            this.name = "Knight";
-            this.moveSet = new Point[] { 
-                new Point(-1, 2), new Point(1, 2),
-                new Point(-1, -2), new Point(1, -2),
-                new Point(-2, -1), new Point(-2, 1),
-                new Point(2, -1), new Point(2, 1),
-            };
-            this.killSet = this.moveSet;
-
-        }
-    }
-
-    public class King : Piece
-    {
-        public King(string color)
-        {
-            this.color = color;
-            this.wasMoved = false;
-            this.isFast = false;
-            this.name = "King";
             this.moveSet = new Point[] {
-                new Point(-1, 1), new Point(0, 1), new Point(1, 1),
-                new Point(-1, 0), new Point(1, 0),
-                new Point(-1, -1), new Point(0, -1), new Point(1, -1),
-            };
+                    new Point(-1, 2), new Point(1, 2),
+                    new Point(-1, -2), new Point(1, -2),
+                    new Point(-2, -1), new Point(-2, 1),
+                    new Point(2, -1), new Point(2, 1),
+                };
             this.killSet = this.moveSet;
         }
+
     }
 
 }
