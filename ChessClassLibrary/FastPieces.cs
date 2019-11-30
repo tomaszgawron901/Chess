@@ -48,76 +48,94 @@ namespace ChessClassLibrary
 
         protected override bool canKill(Point position)
         {
-            //foreach (Point move in killSet)
-            //{
-            //    Point fieldToCheck = this.position + move;
-            //    if (board.CoordinateIsInRange(fieldToCheck))
-            //        continue;
-            //    if (position != fieldToCheck)
-            //        continue;
-            //    if (board.GetPiece(fieldToCheck) == null)
-            //        continue;
-            //    if (board.GetPiece(fieldToCheck).Color == color)
-            //        continue;
-            //    return true;
-            //}
-            //return false;
-            throw new NotImplementedException();
+            if (this.Position == position)
+                return false;
+            if (board.GetPiece(position).Color == this.Color)
+                return false;
+            foreach (Point move in KillSet)
+            {
+                if (move == new Point(0, 0))
+                {
+                    continue;
+                }
+                if (isInLine(position, move))
+                {
+                    for (Point pointToCheck = this.Position + move; board.CoordinateIsInRange(pointToCheck); pointToCheck += move)
+                    {
+                        if (board.GetPiece(pointToCheck) != null)
+                            if (pointToCheck == position)
+                                return true;
+                            else
+                                return false;
+                    }
+                    break;
+                }
+            }
+            return false;
         }
         protected override bool canMove(Point position)
         {
-            //foreach (Point move in moveSet)
-            //{
-            //    Point fieldToCheck = this.position + move;
-            //    if (board.CoordinateIsInRange(fieldToCheck))
-            //        continue;
-            //    if (position != fieldToCheck)
-            //        continue;
-            //    if (board.GetPiece(fieldToCheck) != null)
-            //        continue;
-            //    return true;
-            //}
-            //return false;
-            throw new NotImplementedException();
+            foreach (Point move in moveSet)
+            {
+                if (move == new Point(0, 0))
+                {
+                    if (this.Position == position)
+                        return true;
+                    return false;
+                }
+                if (isInLine(position, move))
+                {
+                    for (Point pointToCheck = this.Position + move; board.CoordinateIsInRange(pointToCheck); pointToCheck += move)
+                    {
+                        if (board.GetPiece(pointToCheck) != null)
+                            return false;
+                        if (pointToCheck == position)
+                            return true;
+                    }
+                    break;
+                }
+            }
+            return false;
         }
-
         private bool isInLine(Point destination, Point move)
         {
-            //Point destinationMove = destination - this.position;
-            //if (Math.Sign(destinationMove.X) != Math.Sign(move.X))
-            //    return false;
-            //if (Math.Sign(destinationMove.Y) != Math.Sign(move.Y))
-            //    return false;
-            //int capacityX;
-            //int capatityY;
-            //if(move.X == 0)
-            //{
-            //    if (destinationMove.X == 0)
-            //    {
-            //        capacityX = -1;
-            //    }
-            //    else return false;
-            //}
-            //else
-            //{
-            //    capacityX = destinationMove.X / move.X;
-            //}
+            Point destinationMove = destination - this.position;
+            if (Math.Sign(destinationMove.X) != Math.Sign(move.X))
+                return false;
+            if (Math.Sign(destinationMove.Y) != Math.Sign(move.Y))
+                return false;
+            if(move == new Point(0,0))
+            {
+                if (move == destinationMove)
+                    return true;
+                else return false;
+            }
 
-            //if (move.Y == 0)
-            //{
-            //    if (destinationMove.Y == 0)
-            //    {
-            //        capatityY = -1;
-            //    }
-            //    else return false;
-            //}
-            //else
-            //{
-            //    capatityY = destinationMove.Y / move.Y;
-            //}
+            if(move.X == 0)
+            {
+                if (destinationMove.X != 0)
+                    return false;
+                if (destinationMove.Y % move.Y != 0)
+                    return false;
+            }
+            else if(move.Y == 0)
+            {
+                if (destinationMove.Y != 0)
+                    return false;
+                if (destinationMove.X % move.X != 0)
+                    return false;
+            }
+            else
+            {
+                if (destinationMove.X == 0 || destinationMove.Y == 0)
+                    return false;
+                if (destinationMove.X % move.X != 0 || destinationMove.Y % move.Y != 0)
+                    return false;
+                if (destinationMove.X / move.X != destinationMove.Y / move.Y)
+                    return false;
 
-            //return true;
-            throw new NotImplementedException();
+            }
+            return true;
         }
     }
 
