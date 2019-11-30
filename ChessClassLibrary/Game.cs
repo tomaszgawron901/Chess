@@ -76,6 +76,8 @@ namespace ChessClassLibrary
         {
             if (!CoordinateIsInRange(position))
                 throw new ArgumentOutOfRangeException("Given position is out of chess board range.");
+            if (piece != null && piece.Position != position)
+                throw new ArgumentException("Piece position does not match to given position.");
             board[position.Y][position.X] = piece;
         }
 

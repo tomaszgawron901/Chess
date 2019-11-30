@@ -121,7 +121,7 @@ namespace ChessClassLibrary
         }
     }
 
-    class Queen : FastPiece
+    public class Queen : FastPiece
     {
         public Queen(string color, Point position, ChessBoard board) :
             base(color, "Queen", position, board)

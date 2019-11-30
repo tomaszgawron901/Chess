@@ -83,8 +83,9 @@ namespace ChessClassLibrary
             this.color = color;
             this.name = name;
             this.wasMoved = false;
-            this.Position = position;
             this.board = board;
+            this.Position = position;
+            
         }
 
         /// <summary>
