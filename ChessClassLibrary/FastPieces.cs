@@ -10,41 +10,7 @@ namespace ChessClassLibrary
     {
         protected FastPiece(string color, string name, Point position, ChessBoard board) :
             base(color, name, position, board)
-        {
-            this.isFast = true;
-        }
-
-        /// <summary>
-        /// Checks whether Piece can be moved to given position.
-        /// </summary>
-        /// <param name="position">Movement destination.</param>
-        /// <returns></returns>
-        public override bool canMoveTo(Point position)
-        {
-            if (!this.board.CoordinateIsInRange(position))
-                return false;
-            if (canKill(position) || canMove(position))
-                return true;
-            return false;
-        }
-
-        /// <summary>
-        /// Moves Piece to given position.
-        /// </summary>
-        /// <param name="position">Movement destination.</param>
-        public override void moveTo(Point position)
-        {
-            if (!canMoveTo(position))
-                throw new ArgumentException("Cannot move to given position.");
-            if (canKill(position))
-            {
-                kill(position);
-            }
-            else
-            {
-                move(position);
-            }
-        }
+        {}
 
         protected override bool canKill(Point position)
         {

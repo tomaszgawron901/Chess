@@ -16,7 +16,6 @@ namespace ChessClassLibrary
     {
         protected string color;
         protected bool wasMoved;
-        protected bool isFast;
         protected string name;
 
         /// <summary>
@@ -95,8 +94,41 @@ namespace ChessClassLibrary
         {
             wasMoved = true;
         }
-        public abstract bool canMoveTo(Point position);
-        public abstract void moveTo(Point position);
+        /// <summary>
+        /// Checks whether Piece can be moved to given position.
+        /// </summary>
+        /// <param name="position">Movement destination.</param>
+        /// <returns></returns>
+        public virtual bool canMoveTo(Point position)
+        {
+            if (!this.board.CoordinateIsInRange(position))
+                return false;
+            if (canKill(position) || canMove(position))
+                return true;
+            return false;
+        }
+
+        /// <summary>
+        /// Moves Piece to given position.
+        /// </summary>
+        /// <param name="position">Movement destination.</param>
+        public virtual void moveTo(Point position)
+        {
+            if (!canMoveTo(position))
+                throw new ArgumentException("Cannot move to given position.");
+            if (canKill(position))
+            {
+                kill(position);
+            }
+            else
+            {
+                move(position);
+            }
+            if (!wasMoved)
+            {
+                firstMove();
+            }
+        }
 
         protected void kill(Point position)
         {

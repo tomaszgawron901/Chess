@@ -13,7 +13,7 @@ namespace ChessClassLibrary
         /// <summary>
         /// The width of the board.
         /// </summary>
-        public static int Width
+        public int Width
         {
             get { return width; }
         }
@@ -21,7 +21,7 @@ namespace ChessClassLibrary
         /// <summary>
         /// The height of the board.
         /// </summary>
-        public static int Height
+        public int Height
         {
             get { return height; }
         }

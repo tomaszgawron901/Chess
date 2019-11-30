@@ -10,40 +10,7 @@ namespace ChessClassLibrary
     {
         protected SlowPiece(string color, string name, Point position, ChessBoard board) :
             base(color, name, position, board)
-        {
-            this.isFast = false;
-        }
-
-        /// <summary>
-        /// Checks whether Piece can be moved to given position.
-        /// </summary>
-        /// <param name="position">Movement destination.</param>
-        /// <returns></returns>
-        public override bool canMoveTo(Point position)
-        {
-            if (!this.board.CoordinateIsInRange(position))
-                return false;
-            if (canKill(position) || canMove(position))
-                return true;
-            return false;
-        }
-
-        /// <summary>
-        /// Moves Piece to given position.
-        /// </summary>
-        /// <param name="position">Movement destination.</param>
-        public override void moveTo(Point position)
-        {
-            if (!canMoveTo(position))
-                throw new ArgumentException("Cannot move to given position.");
-            if(canKill(position))
-            {
-                kill(position);
-            }else
-            {
-                move(position);
-            }
-        }
+        {}
 
         protected override bool canKill(Point position)
         {
@@ -88,6 +55,25 @@ namespace ChessClassLibrary
         }
 
         /// <summary>
+        /// Moves Piece to given position.
+        /// </summary>
+        /// <param name="position">Movement destination.</param>
+        public override void moveTo(Point position)
+        {
+            base.moveTo(position);
+            if(this.Position.Y == board.Height-1)
+            {
+                transformToQueen();
+            }
+        }
+
+        private void transformToQueen()
+        {
+            Piece newQueen = new Queen("White", Position, board);
+            board.SetPiece(newQueen, newQueen.Position);
+        }
+
+        /// <summary>
         /// Performs the appropriate actions when the piece is moving for the first time.
         /// </summary>
         protected override void firstMove()
@@ -106,6 +92,24 @@ namespace ChessClassLibrary
             this.killSet = new Point[] { new Point(-1, -1), new Point(1, -1) };
         }
 
+        /// <summary>
+        /// Moves Piece to given position.
+        /// </summary>
+        /// <param name="position">Movement destination.</param>
+        public override void moveTo(Point position)
+        {
+            base.moveTo(position);
+            if (this.Position.Y == 0)
+            {
+                transformToQueen();
+            }
+        }
+
+        private void transformToQueen()
+        {
+            Piece newQueen = new Queen("Black", Position, board);
+            board.SetPiece(newQueen, newQueen.Position);
+        }
 
         /// <summary>
         /// Performs the appropriate actions when the piece is moving for the first time.
