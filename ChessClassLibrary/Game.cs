@@ -28,7 +28,6 @@ namespace ChessClassLibrary
 
 
 
-
         private Piece[][] board;
 
         /// <summary>

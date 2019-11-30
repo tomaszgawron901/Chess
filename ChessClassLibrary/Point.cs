@@ -75,7 +75,7 @@ namespace ChessClassLibrary
         /// </summary>
         /// <param name="other">Point to add.</param>
         /// <returns>New Point which is the sum of two Points.</returns>
-        public Point Plue(Point other)
+        public Point Plus(Point other)
         {
             return new Point(X + other.X, Y + other.Y);
         }
@@ -102,7 +102,7 @@ namespace ChessClassLibrary
 
         public static Point operator +(Point left, Point right)
         {
-            return left.Plue(right);
+            return left.Plus(right);
         }
 
         public static Point operator -(Point left, Point right)
