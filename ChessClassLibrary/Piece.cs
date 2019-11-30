@@ -8,7 +8,6 @@ namespace ChessClassLibrary
 {
     interface IPiece
     {
-        void firstMove();
         bool canMoveTo(Point positon);
         void moveTo(Point position);
     }
@@ -20,11 +19,6 @@ namespace ChessClassLibrary
         protected bool isFast;
         protected string name;
 
-        protected ChessBoard board;
-        protected Point position;
-
-        protected Point[] moveSet;
-        protected Point[] killSet;
         /// <summary>
         /// Checks whether piece was moved.
         /// </summary>
@@ -49,6 +43,26 @@ namespace ChessClassLibrary
             get { return name; }
         }
 
+        protected ChessBoard board;
+        protected Point position;
+
+        /// <summary>
+        /// The Position of Piece.
+        /// </summary>
+        public Point Position
+        {
+            get { return position; }
+            protected set {
+                if (!board.CoordinateIsInRange(value))
+                    throw new ArgumentException("Cannot set given position.");
+                position = value;
+            }
+        }
+
+        protected Point[] moveSet;
+        protected Point[] killSet;
+
+
         /// <summary>
         /// Returns piece move set.
         /// </summary>
@@ -70,18 +84,39 @@ namespace ChessClassLibrary
             this.color = color;
             this.name = name;
             this.wasMoved = false;
-            this.position = position;
+            this.Position = position;
             this.board = board;
         }
 
         /// <summary>
         /// Performs the appropriate actions when the piece is moving for the first time.
         /// </summary>
-        public virtual void firstMove()
+        protected virtual void firstMove()
         {
             wasMoved = true;
         }
         public abstract bool canMoveTo(Point position);
         public abstract void moveTo(Point position);
+
+        protected void kill(Point position)
+        {
+            if (!canKill(position))
+                throw new ArgumentException("Cannot kill Piece at given position.");
+            board.SetPiece(this, position);
+            board.SetPiece(null, this.Position);
+            this.Position = position;
+
+        }
+        protected void move(Point position)
+        {
+            if (!canMove(position))
+                throw new ArgumentException("Cannot move to given position.");
+            board.SetPiece(this, position);
+            board.SetPiece(null, this.Position);
+            this.Position = position;
+        }
+
+        protected abstract bool canKill(Point position);
+        protected abstract bool canMove(Point position);
     }
 }

@@ -44,7 +44,6 @@
     <Compile Include="FastPieces.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="KingPiece.cs" />
-    <Compile Include="Movement.cs" />
     <Compile Include="Piece.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChessClassLibrary
 {
-    public abstract class King: SlowPiece
+    public class King: SlowPiece
     {
         public King(string color,Point position, ChessBoard board) :
             base(color, "King", position, board)

@@ -8,25 +8,28 @@ namespace ChessClassLibrary
 {
     public class ChessBoard
     {
-        private int width = 8;
-        private int height = 8;
-        private Piece[][] board;
-
+        private static int width = 8;
+        private static int height = 8;
         /// <summary>
-        /// Returns the width of the board.
+        /// The width of the board.
         /// </summary>
-        public int Width
+        public static int Width
         {
             get { return width; }
         }
 
         /// <summary>
-        /// Returns the height of the board.
+        /// The height of the board.
         /// </summary>
-        public int Height
+        public static int Height
         {
             get { return height; }
         }
+
+
+
+
+        private Piece[][] board;
 
         /// <summary>
         /// Returns current board.
@@ -80,14 +83,14 @@ namespace ChessClassLibrary
         private Piece[][] create()
         {
             return new Piece[][] { 
-                createRichRow("White"),
-                createPawnRow("White"),
+                createRichRow(0, "White"),
+                createPawnRow(1, "White"),
                 createEmptyRow(),
                 createEmptyRow(),
                 createEmptyRow(),
                 createEmptyRow(),
-                createPawnRow("Black"),
-                createRichRow("Black")};
+                createPawnRow(6, "Black"),
+                createRichRow(7, "Black")};
         }
 
         private Piece[] createEmptyRow()
@@ -95,46 +98,46 @@ namespace ChessClassLibrary
             return new Piece[] {null, null, null, null, null, null, null, null };
         }
 
-        private Piece[] createPawnRow(string color)
+        private Piece[] createPawnRow(int row, string color)
         {
             if (color != "White" && color != "Black")
                 throw new ArgumentException("Piece can be 'White' or 'Black'.");
             if(color == "White")
             {
                 return new Piece[] {
-                    new WhitePawn(), 
-                    new WhitePawn(), 
-                    new WhitePawn(), 
-                    new WhitePawn(), 
-                    new WhitePawn(), 
-                    new WhitePawn(), 
-                    new WhitePawn(), 
-                    new WhitePawn()};
+                    new WhitePawn(new Point(0, row), this), 
+                    new WhitePawn(new Point(1, row), this), 
+                    new WhitePawn(new Point(2, row), this), 
+                    new WhitePawn(new Point(3, row), this), 
+                    new WhitePawn(new Point(4, row), this), 
+                    new WhitePawn(new Point(5, row), this), 
+                    new WhitePawn(new Point(6, row), this), 
+                    new WhitePawn(new Point(7, row), this)};
             }
             return new Piece[] {
-                new BlackPawn(), 
-                new BlackPawn(), 
-                new BlackPawn(), 
-                new BlackPawn(), 
-                new BlackPawn(), 
-                new BlackPawn(), 
-                new BlackPawn(), 
-                new BlackPawn()};
+                new BlackPawn(new Point(0, row), this),
+                new BlackPawn(new Point(1, row), this),
+                new BlackPawn(new Point(2, row), this),
+                new BlackPawn(new Point(3, row), this),
+                new BlackPawn(new Point(4, row), this),
+                new BlackPawn(new Point(5, row), this),
+                new BlackPawn(new Point(6, row), this),
+                new BlackPawn(new Point(7, row), this)};
         }
 
-        private Piece[] createRichRow(string color)
+        private Piece[] createRichRow(int row, string color)
         {
             if (color != "White" && color != "Black")
                 throw new ArgumentException("Piece can be 'White' or 'Black'.");
             return new Piece[] {
-                new Rook(color),
-                new Knight(color),
-                new Bishop(color),
-                new Queen(color),
-                new King(color),
-                new Bishop(color),
-                new Knight(color),
-                new Rook(color)};
+                new Rook(color,new Point(0, row), this),
+                new Knight(color,new Point(1, row), this),
+                new Bishop(color,new Point(2, row), this),
+                new Queen(color,new Point(3, row), this),
+                new King(color,new Point(4, row), this),
+                new Bishop(color,new Point(5, row), this),
+                new Knight(color,new Point(6, row), this),
+                new Rook(color,new Point(7, row), this)};
         }
     }
 
