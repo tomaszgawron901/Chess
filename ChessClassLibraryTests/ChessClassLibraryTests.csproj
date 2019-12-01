@@ -57,9 +57,9 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ChessBoardTests.cs" />
+    <Compile Include="PawnTests.cs" />
     <Compile Include="PointTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PieceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ChessClassLibrary\ChessClassLibrary.csproj">

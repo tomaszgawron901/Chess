@@ -17,7 +17,7 @@ namespace ChessClassLibrary
             foreach(Point move in killSet)
             {
                 Point fieldToCheck = this.position + move;
-                if (board.CoordinateIsInRange(fieldToCheck))
+                if (!board.CoordinateIsInRange(fieldToCheck))
                     continue;
                 if (position != fieldToCheck)
                     continue;
@@ -34,7 +34,7 @@ namespace ChessClassLibrary
             foreach (Point move in moveSet)
             {
                 Point fieldToCheck = this.position + move;
-                if (board.CoordinateIsInRange(fieldToCheck))
+                if (!board.CoordinateIsInRange(fieldToCheck))
                     continue;
                 if (position != fieldToCheck)
                     continue;
@@ -69,8 +69,7 @@ namespace ChessClassLibrary
 
         private void transformToQueen()
         {
-            Piece newQueen = new Queen("White", Position, board);
-            board.SetPiece(newQueen, newQueen.Position);
+            new Queen("White", Position, board);
         }
 
         /// <summary>
@@ -107,8 +106,7 @@ namespace ChessClassLibrary
 
         private void transformToQueen()
         {
-            Piece newQueen = new Queen("Black", Position, board);
-            board.SetPiece(newQueen, newQueen.Position);
+            new Queen("Black", Position, board);
         }
 
         /// <summary>

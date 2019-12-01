@@ -85,7 +85,7 @@ namespace ChessClassLibrary
             this.wasMoved = false;
             this.board = board;
             this.Position = position;
-            
+            this.board.SetPiece(this, this.Position);
         }
 
         /// <summary>
@@ -135,18 +135,19 @@ namespace ChessClassLibrary
         {
             if (!canKill(position))
                 throw new ArgumentException("Cannot kill Piece at given position.");
+            Point currentPosition = Position;
+            Position = position;
             board.SetPiece(this, position);
-            board.SetPiece(null, this.Position);
-            this.Position = position;
-
+            board.SetPiece(null, currentPosition);
         }
         protected void move(Point position)
         {
             if (!canMove(position))
                 throw new ArgumentException("Cannot move to given position.");
+            Point currentPosition = Position;
+            Position = position;
             board.SetPiece(this, position);
-            board.SetPiece(null, this.Position);
-            this.Position = position;
+            board.SetPiece(null, currentPosition);
         }
 
         protected abstract bool canKill(Point position);
