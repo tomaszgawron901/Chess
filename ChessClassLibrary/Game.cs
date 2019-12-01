@@ -29,6 +29,40 @@ namespace ChessClassLibrary
 
 
         private Piece[][] board;
+        private King whiteKing;
+        private King blackKing;
+
+        /// <summary>
+        /// The White King Piece.
+        /// </summary>
+        public King WhiteKing
+        {
+            get { return whiteKing; }
+            set
+            {
+                if (whiteKing != null)
+                    throw new Exception("There is a White King on the board already.");
+                if (value.Color != "White")
+                    throw new ArgumentException("Wrong color for a White King.");
+                whiteKing = value;
+            }
+        }
+
+        /// <summary>
+        /// The Black King Piece.
+        /// </summary>
+        public King BlackKing
+        {
+            get { return blackKing; }
+            set
+            {
+                if (blackKing != null)
+                    throw new Exception("There is a Black King on the board already.");
+                if (value.Color != "Black")
+                    throw new ArgumentException("Wrong color for the Black King.");
+                blackKing = value;
+            }
+        }
 
         /// <summary>
         /// Returns current board.
@@ -128,7 +162,10 @@ namespace ChessClassLibrary
             new Knight(color, new Point(1, row), this);
             new Bishop(color, new Point(2, row), this);
             new Queen(color, new Point(3, row), this);
-            new King(color, new Point(4, row), this);
+            if (color == "White")
+                new WhiteKing(new Point(4, row), this);
+            else
+                new BlackKing(new Point(4, row), this);
             new Bishop(color, new Point(5, row), this);
             new Knight(color, new Point(6, row), this);
             new Rook(color, new Point(7, row), this);

@@ -100,12 +100,21 @@ namespace ChessClassLibrary
         /// </summary>
         /// <param name="position">Movement destination.</param>
         /// <returns></returns>
-        public virtual bool canMoveTo(Point position)
+        public virtual bool canMoveTo(Point position)// TODO ma sprawdzać jeszcze czy po wykonaniu ruchu król będzie zszachowany.
         {
+            if (Color == "White" && board.WhiteKing.IsChecked())
+                return false;
+            if (color == "Black" && board.BlackKing.IsChecked())
+                return false;
             if (!this.board.CoordinateIsInRange(position))
                 return false;
-            if (canKill(position) || canMove(position))
+            if (canMove(position))
                 return true;
+            if(canKill(position) && board.GetPiece(position) != null)
+            {
+                if(board.GetPiece(position).Color != this.Color)
+                    return true;
+            }
             return false;
         }
 
@@ -150,7 +159,7 @@ namespace ChessClassLibrary
             board.SetPiece(null, currentPosition);
         }
 
-        protected abstract bool canKill(Point position);
+        public abstract bool canKill(Point position);
         protected abstract bool canMove(Point position);
     }
 }

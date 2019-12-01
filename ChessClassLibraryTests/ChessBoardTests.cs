@@ -48,7 +48,12 @@ namespace ChessClassLibrary.Tests
             Assert.AreEqual(board.Width, 8);
             Assert.AreEqual(board.Height, 8);
 
-            for(int y = 2; y < 6; y++ )
+            Assert.IsTrue(board.WhiteKing is King);
+            Assert.IsTrue(board.BlackKing is King);
+            Assert.AreSame(board.WhiteKing, board.GetPiece(new Point(4, 0)));
+            Assert.AreSame(board.BlackKing, board.GetPiece(new Point(4, 7)));
+
+            for (int y = 2; y < 6; y++ )
             {
                 RowIsEmpty(board.Board[y]);
             }

@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace ChessClassLibrary
 {
-    public class King: SlowPiece
+    public interface IKing
+    {
+        bool IsChecked();
+    }
+
+    public abstract class King: SlowPiece, IKing
     {
         public King(string color,Point position, ChessBoard board) :
             base(color, "King", position, board)
@@ -22,6 +27,41 @@ namespace ChessClassLibrary
         public override bool canMoveTo(Point position)
         {
             return base.canMoveTo(position);
+        }
+
+        public bool IsChecked()
+        {
+            foreach (var row in board.Board)
+            {
+                foreach (var piece in row)
+                {
+                    if (piece != null)
+                        if (piece.Color != Color && piece.canKill(Position))
+                            return true;
+                }
+            }
+            return false;
+        }
+        //protected abstract bool canCastle(Point position);
+        //protected abstract void Castle(Point position);
+    }
+
+
+    public class WhiteKing:King
+    {
+        public WhiteKing(Point position, ChessBoard board):
+            base("White", position, board)
+        {
+            this.board.WhiteKing = this;
+        }
+    }
+
+    public class BlackKing : King
+    {
+        public BlackKing(Point position, ChessBoard board) :
+            base("Black", position, board)
+        {
+            this.board.BlackKing = this;
         }
     }
 

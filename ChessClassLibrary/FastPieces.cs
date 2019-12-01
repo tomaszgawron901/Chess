@@ -12,11 +12,9 @@ namespace ChessClassLibrary
             base(color, name, position, board)
         {}
 
-        protected override bool canKill(Point position)
+        public override bool canKill(Point position)
         {
             if (this.Position == position)
-                return false;
-            if (board.GetPiece(position).Color == this.Color)
                 return false;
             foreach (Point move in KillSet)
             {
@@ -28,11 +26,10 @@ namespace ChessClassLibrary
                 {
                     for (Point pointToCheck = this.Position + move; board.CoordinateIsInRange(pointToCheck); pointToCheck += move)
                     {
+                        if (pointToCheck == position)
+                            return true;
                         if (board.GetPiece(pointToCheck) != null)
-                            if (pointToCheck == position)
-                                return true;
-                            else
-                                return false;
+                            return false;
                     }
                     break;
                 }

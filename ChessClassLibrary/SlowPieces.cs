@@ -12,7 +12,7 @@ namespace ChessClassLibrary
             base(color, name, position, board)
         {}
 
-        protected override bool canKill(Point position)
+        public override bool canKill(Point position)
         {
             foreach(Point move in killSet)
             {
@@ -20,10 +20,6 @@ namespace ChessClassLibrary
                 if (!board.CoordinateIsInRange(fieldToCheck))
                     continue;
                 if (position != fieldToCheck)
-                    continue;
-                if (board.GetPiece(fieldToCheck) == null)
-                    continue;
-                if (board.GetPiece(fieldToCheck).Color == color)
                     continue;
                 return true;
             }
