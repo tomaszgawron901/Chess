@@ -100,13 +100,15 @@ namespace ChessClassLibrary
         /// </summary>
         /// <param name="position">Movement destination.</param>
         /// <returns></returns>
-        public virtual bool canMoveTo(Point position)// TODO ma sprawdzać jeszcze czy po wykonaniu ruchu król będzie zszachowany.
+        public virtual bool canMoveTo(Point position)
         {
             if (Color == "White" && board.WhiteKing.IsChecked())
                 return false;
             if (color == "Black" && board.BlackKing.IsChecked())
                 return false;
             if (!this.board.CoordinateIsInRange(position))
+                return false;
+            if (pretendMoveAndCheckIfKingIsChecked(position))
                 return false;
             if (canMove(position))
                 return true;
@@ -116,6 +118,21 @@ namespace ChessClassLibrary
                     return true;
             }
             return false;
+        }
+
+        private bool pretendMoveAndCheckIfKingIsChecked(Point position)
+        {
+            Piece pieceAtDestinationPosition = board.GetPiece(position);
+            board.SetPiece(null, Position);
+            board.SetPiece(new Dummy(Color, position, board), position);
+            bool KingIsChecked;
+            if (color == "White")
+                KingIsChecked = board.WhiteKing.IsChecked();
+            else
+                KingIsChecked = board.BlackKing.IsChecked();
+            board.SetPiece(pieceAtDestinationPosition, position);
+            board.SetPiece(this, this.Position);
+            return KingIsChecked;
         }
 
         /// <summary>
@@ -161,5 +178,24 @@ namespace ChessClassLibrary
 
         public abstract bool canKill(Point position);
         protected abstract bool canMove(Point position);
+    }
+
+    public class Dummy : Piece
+    {
+        public Dummy(string color, Point position, ChessBoard board) : base(color, "", position, board)
+        {
+            moveSet = new Point[] { };
+            killSet = new Point[] { };
+        }
+
+        protected override bool canMove(Point position)
+        {
+            return false;
+        }
+
+        public override bool canKill(Point position)
+        {
+            return false;
+        }
     }
 }
