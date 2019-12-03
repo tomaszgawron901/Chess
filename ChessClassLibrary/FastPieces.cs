@@ -12,11 +12,17 @@ namespace ChessClassLibrary
             base(color, name, position, board)
         {}
 
-        public override bool canKill(Point position)
+        /// <summary>
+        /// Checks whether given position can by achieved by one of the given movements.
+        /// </summary>
+        /// <param name="position">Destination position.</param>
+        /// <param name="Movementset">Available movements</param>
+        /// <returns></returns>
+        public override bool CanAchieve(Point position, Point[] Movementset)
         {
             if (this.Position == position)
                 return false;
-            foreach (Point move in KillSet)
+            foreach (Point move in Movementset)
             {
                 if (move == new Point(0, 0))
                 {
@@ -30,30 +36,6 @@ namespace ChessClassLibrary
                             return true;
                         if (board.GetPiece(pointToCheck) != null)
                             return false;
-                    }
-                    break;
-                }
-            }
-            return false;
-        }
-        protected override bool canMove(Point position)
-        {
-            foreach (Point move in moveSet)
-            {
-                if (move == new Point(0, 0))
-                {
-                    if (this.Position == position)
-                        return true;
-                    return false;
-                }
-                if (isInLine(position, move))
-                {
-                    for (Point pointToCheck = this.Position + move; board.CoordinateIsInRange(pointToCheck); pointToCheck += move)
-                    {
-                        if (board.GetPiece(pointToCheck) != null)
-                            return false;
-                        if (pointToCheck == position)
-                            return true;
                     }
                     break;
                 }

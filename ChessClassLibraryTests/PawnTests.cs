@@ -11,7 +11,6 @@ namespace ChessClassLibrary.Tests
     [TestClass()]
     public class WhitePawnTests
     {
-
         [DataTestMethod()]
         [DataRow(4, 4)]
         [DataRow(0, 0)]
@@ -64,6 +63,69 @@ namespace ChessClassLibrary.Tests
             Assert.IsNull(board.GetPiece(new Point(7, 6)));
             Assert.IsTrue(board.GetPiece(new Point(7, 7)) is Queen);
             Assert.IsTrue(board.GetPiece(new Point(7, 7)).Color == "White");
+        }
+
+        [DataTestMethod()]
+        [DataRow(3, 4)]
+        [DataRow(3, 5)]
+        [DataRow(2, 4)]
+        [DataRow(4, 4)]
+        public void CanMoveTo_correct(int x, int y)
+        {
+            ChessBoard board = new ChessBoard();
+            new BlackPawn(new Point(2, 4), board);
+            new BlackPawn(new Point(4, 4), board);
+            Piece whitePawn = new WhitePawn(new Point(3, 3), board);
+            Assert.IsTrue(whitePawn.canMoveTo(new Point(x, y)));
+        }
+
+        [DataTestMethod()]
+        [DataRow(3, 4)]
+        [DataRow(3, 5)]
+        [DataRow(2, 4)]
+        [DataRow(4, 4)]
+        public void CanMoveTo_false_becouse_King_is_checked(int x, int y)
+        {
+            ChessBoard board = new ChessBoard();
+            new BlackPawn(new Point(2, 4), board);
+            new BlackPawn(new Point(4, 4), board);
+            new Queen("Black", new Point(3, 0), board);
+            Piece whitePawn = new WhitePawn(new Point(3, 3), board);
+            Assert.IsFalse(whitePawn.canMoveTo(new Point(x, y)));
+        }
+
+        [TestMethod()]
+        public void CanMoveTo_false_becouse_King_will_be_checked()
+        {
+            ChessBoard board = new ChessBoard();
+            board.SetPiece(null, new Point(3, 1));
+            new Queen("Black", new Point(2, 0), board);
+            new WhitePawn(new Point(3, 0), board);
+            Assert.IsFalse(board.GetPiece(new Point(3, 0)).canMoveTo(new Point(3, 1)));
+        }
+
+        [TestMethod()]
+        public void MoveTo_correct()
+        {
+            ChessBoard board = new ChessBoard();
+            Piece pawn = board.GetPiece(new Point(7, 1));
+            pawn.moveTo(new Point(7, 2));
+            Assert.AreSame(pawn, board.GetPiece(new Point(7, 2)));
+            Assert.IsNull(board.GetPiece(new Point(7, 1)));
+            new BlackPawn(new Point(6, 3), board);
+            pawn.moveTo(new Point(6, 3));
+            Assert.AreSame(pawn, board.GetPiece(new Point(6, 3)));
+            Assert.IsNull(board.GetPiece(new Point(7, 2)));
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
+        public void MoveTo_jump_above_exception()
+        {
+            ChessBoard board = new ChessBoard();
+            Piece pawn = board.GetPiece(new Point(7, 1));
+            new BlackPawn(new Point(7, 2), board);
+            pawn.moveTo(new Point(7, 3));
         }
     }
 
@@ -124,5 +186,45 @@ namespace ChessClassLibrary.Tests
             Assert.IsTrue(board.GetPiece(new Point(7, 0)) is Queen);
             Assert.IsTrue(board.GetPiece(new Point(7, 0)).Color == "Black");
         }
+
+        [TestMethod()]
+        public void CanMoveTo_correct()
+        {
+            ChessBoard board = new ChessBoard();
+            Assert.IsTrue(board.GetPiece(new Point(7, 6)).canMoveTo(new Point(7, 5)));
+            Assert.IsTrue(board.GetPiece(new Point(7, 6)).canMoveTo(new Point(7, 4)));
+            new WhitePawn(new Point(7, 5), board);
+            Assert.IsFalse(board.GetPiece(new Point(7, 6)).canMoveTo(new Point(7, 5)));
+            Assert.IsFalse(board.GetPiece(new Point(7, 6)).canMoveTo(new Point(7, 4)));
+            board.SetPiece(null, new Point(7, 5));
+            new WhitePawn(new Point(6, 5), board);
+            Assert.IsTrue(board.GetPiece(new Point(7, 6)).canMoveTo(new Point(6, 5)));
+            Assert.IsFalse(board.GetPiece(new Point(7, 6)).canMoveTo(new Point(8, 5)));
+        }
+
+        [TestMethod()]
+        public void MoveTo_correct()
+        {
+            ChessBoard board = new ChessBoard();
+            Piece pawn = board.GetPiece(new Point(7, 6));
+            pawn.moveTo(new Point(7, 5));
+            Assert.AreSame(pawn, board.GetPiece(new Point(7, 5)));
+            Assert.IsNull(board.GetPiece(new Point(7, 6)));
+            new WhitePawn(new Point(6, 4), board);
+            pawn.moveTo(new Point(6, 4));
+            Assert.AreSame(pawn, board.GetPiece(new Point(6, 4)));
+            Assert.IsNull(board.GetPiece(new Point(7, 5)));
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(ArgumentException))]
+        public void MoveTo_jump_above_exception()
+        {
+            ChessBoard board = new ChessBoard();
+            Piece pawn = board.GetPiece(new Point(7, 6));
+            new WhitePawn(new Point(7, 5), board);
+            pawn.moveTo(new Point(7, 4));
+        }
+
     }
 }

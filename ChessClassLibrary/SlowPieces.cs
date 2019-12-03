@@ -12,29 +12,20 @@ namespace ChessClassLibrary
             base(color, name, position, board)
         {}
 
-        public override bool canKill(Point position)
+        /// <summary>
+        /// Checks whether given position can by achieved by one of the given movements.
+        /// </summary>
+        /// <param name="position">Destination position.</param>
+        /// <param name="Movementset">Available movements</param>
+        /// <returns></returns>
+        public override bool CanAchieve(Point position, Point[] Movementset)
         {
-            foreach(Point move in killSet)
+            foreach (Point move in Movementset)
             {
                 Point fieldToCheck = this.position + move;
                 if (!board.CoordinateIsInRange(fieldToCheck))
                     continue;
                 if (position != fieldToCheck)
-                    continue;
-                return true;
-            }
-            return false;
-        }
-        protected override bool canMove(Point position)
-        {
-            foreach (Point move in moveSet)
-            {
-                Point fieldToCheck = this.position + move;
-                if (!board.CoordinateIsInRange(fieldToCheck))
-                    continue;
-                if (position != fieldToCheck)
-                    continue;
-                if (board.GetPiece(fieldToCheck) != null)
                     continue;
                 return true;
             }
@@ -48,6 +39,16 @@ namespace ChessClassLibrary
         {
             this.moveSet = new Point[] { new Point(0, 1), new Point(0, 2) };
             this.killSet = new Point[] { new Point(-1, 1), new Point(1, 1) };
+        }
+
+        public override bool canMoveTo(Point position)
+        {
+            if (!board.CoordinateIsInRange(Position + new Point(0, 1))
+                || (!wasMoved 
+                && position == Position + new Point(0, 2) 
+                && board.GetPiece(Position + new Point(0, 1)) != null))
+                return false;
+            return base.canMoveTo(position);
         }
 
         /// <summary>
@@ -85,6 +86,14 @@ namespace ChessClassLibrary
         {
             this.moveSet = new Point[] { new Point(0, -1), new Point(0, -2) };
             this.killSet = new Point[] { new Point(-1, -1), new Point(1, -1) };
+        }
+
+        public override bool canMoveTo(Point position)
+        {
+            if (!board.CoordinateIsInRange(Position + new Point(0, -1))
+                || (!wasMoved && position == Position + new Point(0, -2) && board.GetPiece(Position + new Point(0, -1)) != null))
+                return false;
+            return base.canMoveTo(position);
         }
 
         /// <summary>

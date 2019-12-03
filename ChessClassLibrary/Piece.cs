@@ -95,6 +95,7 @@ namespace ChessClassLibrary
         {
             wasMoved = true;
         }
+
         /// <summary>
         /// Checks whether Piece can be moved to given position.
         /// </summary>
@@ -102,17 +103,13 @@ namespace ChessClassLibrary
         /// <returns></returns>
         public virtual bool canMoveTo(Point position)
         {
-            if (Color == "White" && board.WhiteKing.IsChecked())
-                return false;
-            if (color == "Black" && board.BlackKing.IsChecked())
-                return false;
             if (!this.board.CoordinateIsInRange(position))
                 return false;
             if (pretendMoveAndCheckIfKingIsChecked(position))
                 return false;
-            if (canMove(position))
+            if (CanAchieve(position, MoveSet) && board.GetPiece(position) == null)
                 return true;
-            if(canKill(position) && board.GetPiece(position) != null)
+            if(CanAchieve(position, KillSet) && board.GetPiece(position) != null)
             {
                 if(board.GetPiece(position).Color != this.Color)
                     return true;
@@ -123,15 +120,19 @@ namespace ChessClassLibrary
         private bool pretendMoveAndCheckIfKingIsChecked(Point position)
         {
             Piece pieceAtDestinationPosition = board.GetPiece(position);
-            board.SetPiece(null, Position);
-            board.SetPiece(new Dummy(Color, position, board), position);
+            Point currentPiecePosition = Position;
+            Position = position;
+
+            board.SetPiece(null, currentPiecePosition);
+            board.SetPiece(this, position);
             bool KingIsChecked;
             if (color == "White")
                 KingIsChecked = board.WhiteKing.IsChecked();
             else
                 KingIsChecked = board.BlackKing.IsChecked();
             board.SetPiece(pieceAtDestinationPosition, position);
-            board.SetPiece(this, this.Position);
+            Position = currentPiecePosition;
+            board.SetPiece(this, currentPiecePosition);
             return KingIsChecked;
         }
 
@@ -143,59 +144,21 @@ namespace ChessClassLibrary
         {
             if (!canMoveTo(position))
                 throw new ArgumentException("Cannot move to given position.");
-            if (canKill(position))
-            {
-                kill(position);
-            }
-            else
-            {
-                move(position);
-            }
+            board.SetPiece(null, Position);
+            Position = position;
+            board.SetPiece(this, position);
             if (!wasMoved)
             {
                 firstMove();
             }
         }
 
-        protected void kill(Point position)
-        {
-            if (!canKill(position))
-                throw new ArgumentException("Cannot kill Piece at given position.");
-            Point currentPosition = Position;
-            Position = position;
-            board.SetPiece(this, position);
-            board.SetPiece(null, currentPosition);
-        }
-        protected void move(Point position)
-        {
-            if (!canMove(position))
-                throw new ArgumentException("Cannot move to given position.");
-            Point currentPosition = Position;
-            Position = position;
-            board.SetPiece(this, position);
-            board.SetPiece(null, currentPosition);
-        }
-
-        public abstract bool canKill(Point position);
-        protected abstract bool canMove(Point position);
-    }
-
-    public class Dummy : Piece
-    {
-        public Dummy(string color, Point position, ChessBoard board) : base(color, "", position, board)
-        {
-            moveSet = new Point[] { };
-            killSet = new Point[] { };
-        }
-
-        protected override bool canMove(Point position)
-        {
-            return false;
-        }
-
-        public override bool canKill(Point position)
-        {
-            return false;
-        }
+        /// <summary>
+        /// Checks whether given position can by achieved by one of the given movements.
+        /// </summary>
+        /// <param name="position">Destination position.</param>
+        /// <param name="Movementset">Available movements</param>
+        /// <returns></returns>
+        public abstract bool CanAchieve(Point position, Point[] Movementset);
     }
 }

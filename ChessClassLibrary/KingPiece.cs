@@ -36,7 +36,7 @@ namespace ChessClassLibrary
                 foreach (var piece in row)
                 {
                     if (piece != null)
-                        if (piece.Color != Color && piece.canKill(Position))
+                        if (piece.Color != Color && piece.CanAchieve(Position, piece.KillSet))
                             return true;
                 }
             }
