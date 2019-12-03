@@ -117,7 +117,7 @@ namespace ChessClassLibrary
             return false;
         }
 
-        private bool pretendMoveAndCheckIfKingIsChecked(Point position)
+        protected bool pretendMoveAndCheckIfKingIsChecked(Point position)
         {
             Piece pieceAtDestinationPosition = board.GetPiece(position);
             Point currentPiecePosition = Position;
