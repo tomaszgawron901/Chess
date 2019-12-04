@@ -8,6 +8,8 @@ namespace ChessClassLibrary
 {
     interface IPiece
     {
+        string Color { get; }
+        string Name { get; }
         bool canMoveTo(Point positon);
         void moveTo(Point position);
     }
@@ -144,6 +146,10 @@ namespace ChessClassLibrary
         {
             if (!canMoveTo(position))
                 throw new ArgumentException("Cannot move to given position.");
+            if (board.GetPiece(position) == board.WhiteKing)
+                board.WhiteKing = null;
+            if (board.GetPiece(position) == board.BlackKing)
+                board.BlackKing = null;
             board.SetPiece(null, Position);
             Position = position;
             board.SetPiece(this, position);

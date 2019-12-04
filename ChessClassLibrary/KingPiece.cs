@@ -56,6 +56,7 @@ namespace ChessClassLibrary
             }
             return false;
         }
+
         protected abstract bool canCastle(Point position);
         protected abstract void Castle(Point position);
     }

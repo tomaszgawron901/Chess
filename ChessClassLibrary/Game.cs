@@ -6,188 +6,172 @@ using System.Threading.Tasks;
 
 namespace ChessClassLibrary
 {
-    public class ChessBoard
+    public enum GameStates { inProgress, whiteWin, blackWin, whiteCheck, blackCheck};
+    public enum Players { WhitePlayer, BlackPlayer };
+    public enum PieceTypes {Pawn, Rook, Knight, Bishop, Queen, King };
+
+    public class BoardManager
     {
-        private static int width = 8;
-        private static int height = 8;
-        /// <summary>
-        /// The width of the board.
-        /// </summary>
-        public int Width
+        private ChessBoard board;
+        private Game game;
+        public BoardManager(ChessBoard board ,Game game)
         {
-            get { return width; }
+            if(game is null)
+                throw new Exception("Game is null.");
+            if (board is null)
+                throw new Exception("ChessBoard is null.");
+            this.game = game;
+            this.board = board;
         }
 
         /// <summary>
-        /// The height of the board.
+        /// Returns a Piece Piece from given position.
         /// </summary>
-        public int Height
+        /// <param name="x">X coordinate.</param>
+        /// <param name="y">Y coordinate.</param>
+        /// <returns>PieceManager from given position.</returns>
+        public PieceManager GetPiece(int x, int y)
         {
-            get { return height; }
-        }
-
-
-
-        private Piece[][] board;
-        private King whiteKing;
-        private King blackKing;
-
-        /// <summary>
-        /// The White King Piece.
-        /// </summary>
-        public King WhiteKing
-        {
-            get { return whiteKing; }
-            set
-            {
-                if (whiteKing != null)
-                    throw new Exception("There is a White King on the board already.");
-                if (value.Color != "White")
-                    throw new ArgumentException("Wrong color for a White King.");
-                whiteKing = value;
-            }
+            return new PieceManager(board.GetPiece(new Point(x, y)), game);
         }
 
         /// <summary>
-        /// The Black King Piece.
+        /// 
         /// </summary>
-        public King BlackKing
-        {
-            get { return blackKing; }
-            set
-            {
-                if (blackKing != null)
-                    throw new Exception("There is a Black King on the board already.");
-                if (value.Color != "Black")
-                    throw new ArgumentException("Wrong color for the Black King.");
-                blackKing = value;
-            }
-        }
-
-        /// <summary>
-        /// Returns current board.
-        /// </summary>
-        public Piece[][] Board
-        {
-            get { return board; }
-        }
-
-        public ChessBoard()
-        {
-            create();
-        }
-
-        /// <summary>
-        /// Checks whether Point position is in the range of the board.
-        /// </summary>
-        /// <param name="position">Point to check.</param>
-        /// <returns>True when Point is in the range, otherwise false.</returns>
-        public bool CoordinateIsInRange(Point position)
-        {
-            if (position.X < 0 || position.X >= width || position.Y < 0 || position.Y >= height)
-                return false;
-            return true;
-        }
-
-        /// <summary>
-        /// Returns Piece from given position.
-        /// </summary>
-        /// <param name="position">Position on the board.</param>
-        /// <returns>The Piece from given position.</returns>
-        public Piece GetPiece(Point position)
-        {
-            if (!CoordinateIsInRange(position))
-                throw new ArgumentOutOfRangeException("Given position is out of chess board range.");
-            return board[position.Y][position.X];
-        }
-
-        /// <summary>
-        /// Sets given Piece at given position.
-        /// </summary>
-        /// <param name="piece">Piece to set.</param>
-        /// <param name="position">Position.</param>
-        public void SetPiece(Piece piece, Point position)
-        {
-            if (!CoordinateIsInRange(position))
-                throw new ArgumentOutOfRangeException("Given position is out of chess board range.");
-            if (piece != null && piece.Position != position)
-                throw new ArgumentException("Piece position does not match to given position.");
-            board[position.Y][position.X] = piece;
-        }
-
-        private void create()
-        {
-            this.board = new Piece[][] {
-                new Piece[8],
-                new Piece[8],
-                new Piece[8],
-                new Piece[8],
-                new Piece[8],
-                new Piece[8],
-                new Piece[8],
-                new Piece[8],
-            };
-            createRichRow(0, "White");
-            createPawnRow(1, "White");
-
-            createPawnRow(6, "Black");
-            createRichRow(7, "Black");
-        }
-
-        private void createPawnRow(int row, string color)
-        {
-            if (color != "White" && color != "Black")
-                throw new ArgumentException("Piece can be 'White' or 'Black'.");
-            if(color == "White")
-            {
-                for(int x = 0; x<Width; x++)
-                {
-                    new WhitePawn(new Point(x, row), this);
-                }
-            }
-            else
-            {
-                for (int x = 0; x < Width; x++)
-                {
-                    new BlackPawn(new Point(x, row), this);
-                }
-            }
-        }
-
-        private void createRichRow(int row, string color)
-        {
-            if (color != "White" && color != "Black")
-                throw new ArgumentException("Piece can be 'White' or 'Black'.");
-            new Rook(color, new Point(0, row), this);
-            new Knight(color, new Point(1, row), this);
-            new Bishop(color, new Point(2, row), this);
-            new Queen(color, new Point(3, row), this);
-            if (color == "White")
-                new WhiteKing(new Point(4, row), this);
-            else
-                new BlackKing(new Point(4, row), this);
-            new Bishop(color, new Point(5, row), this);
-            new Knight(color, new Point(6, row), this);
-            new Rook(color, new Point(7, row), this);
-        }
-    }
-
-    public class Game
-    {
-        private ChessBoard chessBoard;
-        private string playerColor;
-        public Game()
-        {
-            chessBoard = new ChessBoard();
-            playerColor = "White";
-        }
-
-
-
-        public bool CanMove(Point from, Point to)// TODO ------------------- TODO ------------------------ TODO
+        /// <returns></returns>
+        public PieceManager[][] GetCurrentBoard()
         {
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Return current state of the board.
+        /// </summary>
+        /// <returns></returns>
+        public GameStates GetState()
+        {
+            if (board.WhiteKing is null)
+                return GameStates.blackWin;
+            if (board.BlackKing is null)
+                return GameStates.whiteWin;
+            if (board.WhiteKing.IsChecked())
+                return GameStates.whiteCheck;
+            if (board.BlackKing.IsChecked())
+                return GameStates.blackCheck;
+            return GameStates.inProgress;
+        }
+    }
+
+    public class PieceManager
+    {
+        private Piece piece;
+        private Game game;
+        public PieceManager(Piece piece, Game game)
+        {
+            if (game is null)
+                throw new Exception("Game is null.");
+            this.piece = piece;
+            this.game = game;
+        }
+
+        public string Color
+        {
+            get {
+                if (piece is null)
+                    return null;
+                return piece.Color; }
+        }
+        public string Name
+        {
+            get {
+                if (piece is null)
+                    return null;
+                return piece.Name; }
+        }
+
+        /// <summary>
+        /// Checks whether Piece can be moved to given position.
+        /// </summary>
+        /// <param name="x">X coordinate.</param>
+        /// <param name="y">Y coordinate</param>
+        /// <returns></returns>
+        public bool canMoveTo(int x, int y)
+        {
+            if (game.PlayerTurn == Players.WhitePlayer && piece.Color == "Black")
+                return false;
+            if (game.PlayerTurn == Players.BlackPlayer && piece.Color == "White")
+                return false;
+            if (game.GameState == GameStates.blackWin || game.GameState == GameStates.whiteWin)
+                return false;
+            if (piece is null)
+                return false;
+            return piece.canMoveTo(new Point(x, y));
+        }
+
+        /// <summary>
+        /// Moves Piece to given position.
+        /// </summary>
+        /// <param name="x">X coordinate.</param>
+        /// <param name="y">Y coordinate</param>
+        public void moveTo(int x, int y)
+        {
+            if (game.GameState == GameStates.blackWin || game.GameState == GameStates.whiteWin)
+                throw new Exception("Cannot move, the game is over.");
+            if (piece is null)
+                throw new Exception("Cannot move not existed Piece.");
+            if (!canMoveTo(x, y))
+                throw new Exception("Cannot move Piece to given position.");
+            piece.moveTo(new Point(x, y));
+            game.AnotherPlayerTurn();
+            game.UpdateState();
+        }
+    }
+
+
+    public interface UserGame
+    {
+        BoardManager Board { get; }
+        GameStates GameState { get; }
+        Players PlayerTurn { get; }
+    }
+
+    public class Game: UserGame
+    {
+        private BoardManager board;
+        private GameStates gameState;
+        public Players playerTurn;
+
+        public BoardManager Board
+        {
+            get { return board; }
+        }
+        public GameStates GameState
+        {
+            get { return gameState; }
+        }
+        public Players PlayerTurn
+        {
+            get { return playerTurn; }
+        }
+
+        public Game()
+        {
+            board = new BoardManager(new ChessBoard(), this);
+            gameState = GameStates.inProgress;
+            playerTurn = Players.WhitePlayer;
+        }
+
+        public void AnotherPlayerTurn()
+        {
+            if (PlayerTurn == Players.WhitePlayer)
+                playerTurn = Players.BlackPlayer;
+            else if(PlayerTurn == Players.BlackPlayer)
+                playerTurn = Players.WhitePlayer;
+        }
+
+        public void UpdateState()
+        {
+            gameState = board.GetState();
+        }
     }
 }
