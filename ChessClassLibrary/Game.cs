@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ChessClassLibrary
 {
-    public enum GameStates { inProgress, whiteWin, blackWin, whiteCheck, blackCheck};
+    public enum GameStates { inProgress, whiteWin, blackWin, whiteCheck, blackCheck };
     public enum Players { WhitePlayer, BlackPlayer };
-    public enum PieceTypes {Pawn, Rook, Knight, Bishop, Queen, King };
+    public enum PieceTypes {Pawn, Rook, Knight, Bishop, Queen, King};
 
     public class BoardManager
     {
@@ -17,11 +17,27 @@ namespace ChessClassLibrary
         public BoardManager(ChessBoard board ,Game game)
         {
             if(game is null)
-                throw new Exception("Game is null.");
+                throw new Exception("Game does not exist.");
             if (board is null)
-                throw new Exception("ChessBoard is null.");
+                throw new Exception("ChessBoard does not exist.");
             this.game = game;
             this.board = board;
+        }
+
+        /// <summary>
+        /// Gets the width of the board.
+        /// </summary>
+        public int BoardWidth
+        {
+            get { return board.Width; }
+        }
+
+        /// <summary>
+        /// Gest the height of the board.
+        /// </summary>
+        public int BoardHeight
+        {
+            get { return board.Height; }
         }
 
         /// <summary>
@@ -32,16 +48,10 @@ namespace ChessClassLibrary
         /// <returns>PieceManager from given position.</returns>
         public PieceManager GetPiece(int x, int y)
         {
-            return new PieceManager(board.GetPiece(new Point(x, y)), game);
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public PieceManager[][] GetCurrentBoard()
-        {
-            throw new NotImplementedException();
+            Piece p = board.GetPiece(new Point(x, y));
+            if (p is null)
+                return null;
+            return new PieceManager(p, game);
         }
 
         /// <summary>
@@ -69,24 +79,59 @@ namespace ChessClassLibrary
         public PieceManager(Piece piece, Game game)
         {
             if (game is null)
-                throw new Exception("Game is null.");
+                throw new Exception("Game does not exist.");
+            if (piece is null)
+                throw new Exception("Piece does not exist.");
             this.piece = piece;
             this.game = game;
         }
 
-        public string Color
+        /// <summary>
+        /// Gets Piece owner.
+        /// </summary>
+        public Players Owen
         {
             get {
                 if (piece is null)
-                    return null;
-                return piece.Color; }
+                    throw new Exception("Piece does not exist.");
+                switch (piece.Color)
+                {
+                    case "White":
+                        return Players.WhitePlayer;
+                    case "Black":
+                        return Players.BlackPlayer;
+                    default:
+                        throw new Exception("Unexpected ovner.");
+                }
+            }
         }
-        public string Name
+
+        /// <summary>
+        /// Gets Piece type.
+        /// </summary>
+        public PieceTypes Type
         {
             get {
                 if (piece is null)
-                    return null;
-                return piece.Name; }
+                    throw new Exception("Piece does not exist.");
+                switch(piece.Name)
+                {
+                    case "Pawn":
+                        return PieceTypes.Pawn;
+                    case "Rook":
+                        return PieceTypes.Rook;
+                    case "Knight":
+                        return PieceTypes.Knight;
+                    case "Bishop":
+                        return PieceTypes.Bishop;
+                    case "Quenn":
+                        return PieceTypes.Queen;
+                    case "King":
+                        return PieceTypes.King;
+                    default:
+                        throw new Exception("Unexpected Piece type.");
+                }
+            }
         }
 
         /// <summary>
@@ -97,9 +142,9 @@ namespace ChessClassLibrary
         /// <returns></returns>
         public bool canMoveTo(int x, int y)
         {
-            if (game.PlayerTurn == Players.WhitePlayer && piece.Color == "Black")
+            if (game.PlayerTurn == Players.WhitePlayer && Owen == Players.BlackPlayer)
                 return false;
-            if (game.PlayerTurn == Players.BlackPlayer && piece.Color == "White")
+            if (game.PlayerTurn == Players.BlackPlayer && Owen == Players.WhitePlayer)
                 return false;
             if (game.GameState == GameStates.blackWin || game.GameState == GameStates.whiteWin)
                 return false;
@@ -126,7 +171,6 @@ namespace ChessClassLibrary
             game.UpdateState();
         }
     }
-
 
     public interface UserGame
     {
