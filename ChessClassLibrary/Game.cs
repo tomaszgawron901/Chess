@@ -89,7 +89,7 @@ namespace ChessClassLibrary
         /// <summary>
         /// Gets Piece owner.
         /// </summary>
-        public Players Owen
+        public Players Owner
         {
             get {
                 if (piece is null)
@@ -142,9 +142,9 @@ namespace ChessClassLibrary
         /// <returns></returns>
         public bool canMoveTo(int x, int y)
         {
-            if (game.PlayerTurn == Players.WhitePlayer && Owen == Players.BlackPlayer)
+            if (game.PlayerTurn == Players.WhitePlayer && Owner == Players.BlackPlayer)
                 return false;
-            if (game.PlayerTurn == Players.BlackPlayer && Owen == Players.WhitePlayer)
+            if (game.PlayerTurn == Players.BlackPlayer && Owner == Players.WhitePlayer)
                 return false;
             if (game.GameState == GameStates.blackWin || game.GameState == GameStates.whiteWin)
                 return false;
@@ -174,8 +174,19 @@ namespace ChessClassLibrary
 
     public interface UserGame
     {
+        /// <summary>
+        /// Gets board manager.
+        /// </summary>
         BoardManager Board { get; }
+
+        /// <summary>
+        /// Gets current game state.
+        /// </summary>
         GameStates GameState { get; }
+
+        /// <summary>
+        /// Gets current playing player.
+        /// </summary>
         Players PlayerTurn { get; }
     }
 
