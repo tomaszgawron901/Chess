@@ -14,6 +14,23 @@ namespace ChessClassLibrary.Tests
         [DataTestMethod()]
         [DataRow("White")]
         [DataRow("Black")]
+        public void constructor_correct(string color)
+        {
+            ChessBoard board = new ChessBoard();
+            Piece rook = new Rook(color, new Point(3, 4), board);
+            Assert.AreEqual(rook.Color, color);
+            Assert.AreEqual(rook.Position, new Point(3, 4));
+            Assert.AreSame(rook, board.GetPiece(new Point(3, 4)));
+            Assert.AreSame(rook.KillSet, rook.MoveSet);
+            Assert.AreEqual(rook.KillSet[0], new Point(0, 1));
+            Assert.AreEqual(rook.KillSet[1], new Point(1, 0));
+            Assert.AreEqual(rook.KillSet[2], new Point(0, -1));
+            Assert.AreEqual(rook.KillSet[3], new Point(-1, 0));
+        }
+
+        [DataTestMethod()]
+        [DataRow("White")]
+        [DataRow("Black")]
         public void canMoveTo_correct(string color)
         {
             ChessBoard board = new ChessBoard();

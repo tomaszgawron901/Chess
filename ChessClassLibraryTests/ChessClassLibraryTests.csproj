@@ -56,6 +56,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="BishopTests.cs" />
     <Compile Include="ChessBoardTests.cs" />
     <Compile Include="KingTests.cs" />
     <Compile Include="KnightTests.cs" />
