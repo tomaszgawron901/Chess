@@ -63,6 +63,7 @@
     <Compile Include="PawnTests.cs" />
     <Compile Include="PointTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueenTests.cs" />
     <Compile Include="RookTests.cs" />
   </ItemGroup>
   <ItemGroup>

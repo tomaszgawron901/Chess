@@ -19,6 +19,7 @@ namespace ChessClassLibrary.Tests
             ChessBoard board = new ChessBoard();
             Piece rook = new Rook(color, new Point(3, 4), board);
             Assert.AreEqual(rook.Color, color);
+            Assert.AreEqual(rook.Name, "Rook");
             Assert.AreEqual(rook.Position, new Point(3, 4));
             Assert.AreSame(rook, board.GetPiece(new Point(3, 4)));
             Assert.AreSame(rook.KillSet, rook.MoveSet);

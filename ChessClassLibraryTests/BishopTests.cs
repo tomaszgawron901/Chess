@@ -19,6 +19,7 @@ namespace ChessClassLibrary.Tests
             ChessBoard board = new ChessBoard();
             Piece bishop = new Bishop(color, new Point(0, 2), board);
             Assert.AreEqual(bishop.Color, color);
+            Assert.AreEqual(bishop.Name, "Bishop");
             Assert.AreEqual(bishop.Position, new Point(0, 2));
             Assert.IsTrue(bishop.MoveSet.Contains(new Point(-1, 1)));
             Assert.IsTrue(bishop.MoveSet.Contains(new Point(1, 1)));
