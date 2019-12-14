@@ -20,6 +20,7 @@ namespace ChessClassLibrary.Tests
             Piece queen = new Queen(color, new Point(3, 4), board);
             Assert.AreEqual(queen.Color, color);
             Assert.AreEqual(queen.Name, "Queen");
+            Assert.IsTrue(queen is FastPiece);
             Assert.AreEqual(queen.Position, new Point(3, 4));
             Assert.AreSame(queen, board.GetPiece(new Point(3, 4)));
             Assert.AreSame(queen.KillSet, queen.MoveSet);

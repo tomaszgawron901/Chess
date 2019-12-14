@@ -19,6 +19,10 @@ namespace ChessClassLibrary.Tests
         {
             ChessBoard board = new ChessBoard();
             Piece whitePawn = new WhitePawn(new Point(x, y), board);
+            Assert.AreEqual(whitePawn.Color, "White");
+            Assert.AreEqual(whitePawn.Name, "Pawn");
+            Assert.IsTrue(whitePawn is SlowPiece);
+            Assert.IsFalse(whitePawn.WasMoved);
             Assert.AreSame(board.GetPiece(new Point(x, y)), whitePawn);
             Assert.AreEqual(whitePawn.Position, new Point(x, y));
         }
@@ -141,6 +145,10 @@ namespace ChessClassLibrary.Tests
         {
             ChessBoard board = new ChessBoard();
             Piece blackPawn = new BlackPawn(new Point(x, y), board);
+            Assert.AreEqual(blackPawn.Color, "Black");
+            Assert.AreEqual(blackPawn.Name, "Pawn");
+            Assert.IsTrue(blackPawn is SlowPiece);
+            Assert.IsFalse(blackPawn.WasMoved);
             Assert.AreSame(board.GetPiece(new Point(x, y)), blackPawn);
             Assert.AreEqual(blackPawn.Position, new Point(x, y));
         }

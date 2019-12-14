@@ -20,6 +20,7 @@ namespace ChessClassLibrary.Tests
             Piece knight = new Knight(color, new Point(0, 2), board);
             Assert.AreEqual(knight.Color, color);
             Assert.AreEqual(knight.Name, "Knight");
+            Assert.IsTrue(knight is SlowPiece);
             Assert.AreEqual(knight.Position, new Point(0, 2));
             Assert.IsTrue(knight.MoveSet.Contains(new Point(-1, 2)));
             Assert.IsTrue(knight.MoveSet.Contains(new Point(1, 2)));

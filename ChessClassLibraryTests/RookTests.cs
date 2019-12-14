@@ -20,13 +20,14 @@ namespace ChessClassLibrary.Tests
             Piece rook = new Rook(color, new Point(3, 4), board);
             Assert.AreEqual(rook.Color, color);
             Assert.AreEqual(rook.Name, "Rook");
+            Assert.IsTrue(rook is FastPiece);
             Assert.AreEqual(rook.Position, new Point(3, 4));
             Assert.AreSame(rook, board.GetPiece(new Point(3, 4)));
             Assert.AreSame(rook.KillSet, rook.MoveSet);
-            Assert.AreEqual(rook.KillSet[0], new Point(0, 1));
-            Assert.AreEqual(rook.KillSet[1], new Point(1, 0));
-            Assert.AreEqual(rook.KillSet[2], new Point(0, -1));
-            Assert.AreEqual(rook.KillSet[3], new Point(-1, 0));
+            Assert.IsTrue(rook.KillSet.Contains(new Point(0, 1)));
+            Assert.IsTrue(rook.KillSet.Contains(new Point(1, 0)));
+            Assert.IsTrue(rook.KillSet.Contains(new Point(0, -1)));
+            Assert.IsTrue(rook.KillSet.Contains(new Point(-1, 0)));
         }
 
         [DataTestMethod()]
