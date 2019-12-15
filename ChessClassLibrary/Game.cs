@@ -41,7 +41,8 @@ namespace ChessClassLibrary
         }
 
         /// <summary>
-        /// Returns a Piece Piece from given position.
+        /// Returns a Piece from given position.
+        /// If there is no Piece at given Position returns null.
         /// </summary>
         /// <param name="x">X coordinate.</param>
         /// <param name="y">Y coordinate.</param>
@@ -55,20 +56,12 @@ namespace ChessClassLibrary
         }
 
         /// <summary>
-        /// Return current state of the board.
+        /// Returns current state of the board.
         /// </summary>
         /// <returns></returns>
         public GameStates GetState()
         {
-            if (board.WhiteKing is null)
-                return GameStates.blackWin;
-            if (board.BlackKing is null)
-                return GameStates.whiteWin;
-            if (board.WhiteKing.IsChecked())
-                return GameStates.whiteCheck;
-            if (board.BlackKing.IsChecked())
-                return GameStates.blackCheck;
-            return GameStates.inProgress;
+            return board.GetState();
         }
     }
 
@@ -124,7 +117,7 @@ namespace ChessClassLibrary
                         return PieceTypes.Knight;
                     case "Bishop":
                         return PieceTypes.Bishop;
-                    case "Quenn":
+                    case "Queen":
                         return PieceTypes.Queen;
                     case "King":
                         return PieceTypes.King;

@@ -163,5 +163,54 @@ namespace ChessClassLibrary.Tests
             Piece piece = new Rook("white", new Point(x-1, y-1), board2);
             board2.SetPiece(piece, new Point(x, y));
         }
+
+        [TestMethod()]
+        public void getState_inProgress()
+        {
+            ChessBoard board = new ChessBoard();
+            Assert.AreEqual(board.GetState(), GameStates.inProgress);
+            board.GetPiece(new Point(6, 0)).moveTo(new Point(5, 2));
+            Assert.AreEqual(board.GetState(), GameStates.inProgress);
+            board.GetPiece(new Point(6, 7)).moveTo(new Point(5, 5));
+            Assert.AreEqual(board.GetState(), GameStates.inProgress);
+        }
+
+        [TestMethod()]
+        public void getState_White_Checked()
+        {
+            ChessBoard board = new ChessBoard();
+            board.SetPiece(null, new Point(5, 1));
+            new Bishop("Black", new Point(7, 3), board);
+            Assert.AreEqual(board.GetState(), GameStates.whiteCheck);
+        }
+
+        [TestMethod()]
+        public void getState_Black_Checked()
+        {
+            ChessBoard board = new ChessBoard();
+            board.SetPiece(null, new Point(5, 6));
+            new Bishop("White", new Point(7, 4), board);
+            Assert.AreEqual(board.GetState(), GameStates.blackCheck);
+        }
+
+        [TestMethod()]
+        public void getState_WhiteWin()
+        {
+            ChessBoard board = new ChessBoard();
+            board.SetPiece(null, new Point(5, 6));
+            new Bishop("White", new Point(7, 4), board);
+            board.GetPiece(new Point(7, 4)).moveTo(new Point(4, 7));
+            Assert.AreEqual(board.GetState(), GameStates.whiteWin);
+        }
+
+        [TestMethod()]
+        public void getState_BlackWin()
+        {
+            ChessBoard board = new ChessBoard();
+            board.SetPiece(null, new Point(5, 1));
+            new Bishop("Black", new Point(7, 3), board);
+            board.GetPiece(new Point(7, 3)).moveTo(new Point(4, 0));
+            Assert.AreEqual(board.GetState(), GameStates.blackWin);
+        }
     }
 }

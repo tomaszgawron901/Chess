@@ -26,8 +26,6 @@ namespace ChessClassLibrary
             get { return height; }
         }
 
-
-
         private Piece[][] board;
         private King whiteKing;
         private King blackKing;
@@ -40,10 +38,13 @@ namespace ChessClassLibrary
             get { return whiteKing; }
             set
             {
-                if (whiteKing != null)
-                    throw new Exception("There is a White King on the board already.");
-                if (value.Color != "White")
-                    throw new ArgumentException("Wrong color for a White King.");
+                if(value != null)
+                {
+                    if (whiteKing != null)
+                        throw new Exception("There is a White King on the board already.");
+                    if (value.Color != "White")
+                        throw new ArgumentException("Wrong color for a White King.");
+                }
                 whiteKing = value;
             }
         }
@@ -56,10 +57,13 @@ namespace ChessClassLibrary
             get { return blackKing; }
             set
             {
-                if (blackKing != null)
-                    throw new Exception("There is a Black King on the board already.");
-                if (value.Color != "Black")
-                    throw new ArgumentException("Wrong color for the Black King.");
+                if(value != null)
+                {
+                    if (blackKing != null)
+                        throw new Exception("There is a Black King on the board already.");
+                    if (value.Color != "Black")
+                        throw new ArgumentException("Wrong color for the Black King.");
+                }
                 blackKing = value;
             }
         }
@@ -169,6 +173,23 @@ namespace ChessClassLibrary
             new Bishop(color, new Point(5, row), this);
             new Knight(color, new Point(6, row), this);
             new Rook(color, new Point(7, row), this);
+        }
+
+        /// <summary>
+        /// Returns current state of the board.
+        /// </summary>
+        /// <returns></returns>
+        public GameStates GetState()
+        {
+            if (this.WhiteKing is null)
+                return GameStates.blackWin;
+            if (this.BlackKing is null)
+                return GameStates.whiteWin;
+            if (this.WhiteKing.IsChecked())
+                return GameStates.whiteCheck;
+            if (this.BlackKing.IsChecked())
+                return GameStates.blackCheck;
+            return GameStates.inProgress;
         }
     }
 }
