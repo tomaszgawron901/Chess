@@ -57,6 +57,38 @@ namespace ChessClassLibrary
             return false;
         }
 
+        public bool isCheckMated()
+        {
+            if (!IsChecked())
+                return false;
+            foreach (var row in board.Board)
+            {
+                foreach (var piece in row)
+                {
+                    if (piece != null && piece.Color == Color && piece.canMoveAnywhere())
+                        return false;
+                }
+            }
+            return true;
+        }
+
+        public bool isStaleMated()
+        {
+            if (IsChecked())
+                return false;
+            if (board.onlyKingsAlive())
+                return true;
+            foreach (var row in board.Board)
+            {
+                foreach (var piece in row)
+                {
+                    if (piece != null && piece.Color == Color && piece.canMoveAnywhere())
+                        return false;
+                }
+            }
+            return true;
+        }
+
         protected abstract bool canCastle(Point position);
         protected abstract void Castle(Point position);
     }

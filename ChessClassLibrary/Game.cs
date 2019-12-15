@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChessClassLibrary
 {
-    public enum GameStates { inProgress, whiteWin, blackWin, whiteCheck, blackCheck };
+    public enum GameStates { inProgress, whiteWin, blackWin, whiteCheck, blackCheck, stalemate };
     public enum Players { WhitePlayer, BlackPlayer };
     public enum PieceTypes {Pawn, Rook, Knight, Bishop, Queen, King};
 
@@ -139,7 +139,7 @@ namespace ChessClassLibrary
                 return false;
             if (game.PlayerTurn == Players.BlackPlayer && Owner == Players.WhitePlayer)
                 return false;
-            if (game.GameState == GameStates.blackWin || game.GameState == GameStates.whiteWin)
+            if (game.GameState == GameStates.blackWin || game.GameState == GameStates.whiteWin || game.GameState == GameStates.stalemate)
                 return false;
             if (piece is null)
                 return false;

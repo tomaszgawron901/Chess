@@ -119,6 +119,22 @@ namespace ChessClassLibrary
             return false;
         }
 
+        /// <summary>
+        /// Checks if Piece can move to any position.
+        /// </summary>
+        public bool canMoveAnywhere()
+        {
+            for(int x=0; x < board.Width; x++)
+            {
+                for(int y = 0; y < board.Height; y++)
+                {
+                    if (canMoveTo(new Point(x, y)))
+                        return true;
+                }
+            }
+            return false;
+        }
+
         protected bool pretendMoveAndCheckIfKingIsChecked(Point position)
         {
             Piece pieceAtDestinationPosition = board.GetPiece(position);

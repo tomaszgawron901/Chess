@@ -197,9 +197,10 @@ namespace ChessClassLibrary.Tests
         public void getState_WhiteWin()
         {
             ChessBoard board = new ChessBoard();
-            board.SetPiece(null, new Point(5, 6));
-            new Bishop("White", new Point(7, 4), board);
-            board.GetPiece(new Point(7, 4)).moveTo(new Point(4, 7));
+            new Queen("White", new Point(5, 7), board);
+            new Queen("White", new Point(4, 6), board);
+            new Queen("White", new Point(5, 2), board);
+            board.GetPiece(new Point(5, 2)).moveTo(new Point(5, 6));
             Assert.AreEqual(board.GetState(), GameStates.whiteWin);
         }
 
@@ -207,9 +208,10 @@ namespace ChessClassLibrary.Tests
         public void getState_BlackWin()
         {
             ChessBoard board = new ChessBoard();
-            board.SetPiece(null, new Point(5, 1));
-            new Bishop("Black", new Point(7, 3), board);
-            board.GetPiece(new Point(7, 3)).moveTo(new Point(4, 0));
+            new Queen("Black", new Point(4, 1), board);
+            new Queen("Black", new Point(5, 0), board);
+            new Queen("Black", new Point(5, 2), board);
+            board.GetPiece(new Point(5, 2)).moveTo(new Point(5, 1));
             Assert.AreEqual(board.GetState(), GameStates.blackWin);
         }
     }

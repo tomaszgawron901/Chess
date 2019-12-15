@@ -181,15 +181,36 @@ namespace ChessClassLibrary
         /// <returns></returns>
         public GameStates GetState()
         {
-            if (this.WhiteKing is null)
+            if (this.WhiteKing.isCheckMated())
                 return GameStates.blackWin;
-            if (this.BlackKing is null)
+            if (this.BlackKing.isCheckMated())
                 return GameStates.whiteWin;
+            if (this.whiteKing.isStaleMated() || this.blackKing.isStaleMated())
+                return GameStates.stalemate;
             if (this.WhiteKing.IsChecked())
                 return GameStates.whiteCheck;
             if (this.BlackKing.IsChecked())
                 return GameStates.blackCheck;
             return GameStates.inProgress;
+        }
+
+        /// <summary>
+        /// Check if there are only Kings on the Board.
+        /// </summary>
+        /// <returns></returns>
+        public bool onlyKingsAlive()
+        {
+            if (WhiteKing == null || blackKing == null)
+                return false;
+            foreach (var row in Board)
+            {
+                foreach(var piece in row)
+                {
+                    if (piece != null && !(piece is King))
+                        return false;
+                }
+            }
+            return true;
         }
     }
 }
