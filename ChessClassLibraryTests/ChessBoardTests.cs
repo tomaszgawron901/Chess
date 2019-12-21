@@ -214,5 +214,46 @@ namespace ChessClassLibrary.Tests
             board.GetPiece(new Point(5, 2)).moveTo(new Point(5, 1));
             Assert.AreEqual(board.GetState(), GameStates.blackWin);
         }
+
+        [TestMethod()]
+        public void getState_stalemate_only_kings_left()
+        {
+            ChessBoard board = new ChessBoard();
+            for(int x=0; x< board.Width; x++)
+            {
+                for(int y=0; y<board.Height; y++)
+                {
+                    if(board.GetPiece(new Point(x, y)) != null && !(board.GetPiece(new Point(x, y)) is King))
+                    {
+                        board.SetPiece(null, new Point(x, y));
+                    }
+                }
+            }
+            Assert.IsTrue(board.GetState() == GameStates.stalemate);
+        }
+
+
+        [TestMethod()]
+        public void getState_stalemate()
+        {
+            ChessBoard board = new ChessBoard();
+            for (int x = 0; x < board.Width; x++)
+            {
+                for (int y = 0; y < board.Height; y++)
+                {
+                    if (board.GetPiece(new Point(x, y)) != null && !(board.GetPiece(new Point(x, y)) is King))
+                    {
+                        board.SetPiece(null, new Point(x, y));
+                    }
+                }
+            }
+            new WhitePawn(new Point(4, 6), board);
+            board.WhiteKing.moveTo(new Point(4, 1));
+            board.WhiteKing.moveTo(new Point(4, 2));
+            board.WhiteKing.moveTo(new Point(4, 3));
+            board.WhiteKing.moveTo(new Point(4, 4));
+            board.WhiteKing.moveTo(new Point(4, 5));
+            Assert.IsTrue(board.GetState() == GameStates.stalemate);
+        }
     }
 }

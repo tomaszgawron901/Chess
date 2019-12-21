@@ -17,7 +17,6 @@ namespace ChessClassLibrary
         {
             get { return width; }
         }
-
         /// <summary>
         /// The height of the board.
         /// </summary>
