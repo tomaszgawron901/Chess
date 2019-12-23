@@ -7,10 +7,37 @@ using System.Threading.Tasks;
 
 namespace ChessClassLibrary
 {
-    public enum GameStates { inProgress, whiteWin, blackWin, whiteCheck, blackCheck, stalemate };
+    /// <summary>
+    /// Desctibes game state.
+    /// </summary>
+    public enum GameStates { 
+        /// <summary>Game in progress.</summary>
+        inProgress,
+        /// <summary>Black King checkmated. White Player wins.</summary>
+        whiteWin,
+        /// <summary>White King checkmated. Black Player wins.</summary>
+        blackWin,
+        /// <summary>White King checked.</summary>
+        whiteCheck,
+        /// <summary>Black King checked.</summary>
+        blackCheck,
+        /// <summary>No one wins. Game ended.</summary>
+        stalemate
+    };
+    /// <summary>
+    /// Types of players.
+    /// </summary>
     public enum Players { WhitePlayer, BlackPlayer, None };
-    public enum PieceTypes {Pawn, Rook, Knight, Bishop, Queen, King, Empty};
+    /// <summary>
+    /// Types of Pieces.
+    /// </summary>
+    public enum PieceTypes {Pawn, Rook, Knight, Bishop, Queen, King,
+        /// <summary>Empty field on a board. </summary>
+        Empty};
 
+    /// <summary>
+    /// Class responsible for all operations on Board.
+    /// </summary>
     public class BoardManager: IEnumerable<IPieceManager>
     {
         private sealed class BoardIterator : IEnumerator<IPieceManager>
@@ -82,8 +109,8 @@ namespace ChessClassLibrary
         /// <summary>
         /// Returns a PieceManager from given position.
         /// </summary>
-        /// <param name="x">X coordinate.</param>
-        /// <param name="y">Y coordinate.</param>
+        /// <param name="x">Horizontal coordinate.</param>
+        /// <param name="y">Vertical coordinate.</param>
         /// <returns>PieceManager from given position.</returns>
         public IPieceManager GetPiece(int x, int y)
         {
@@ -112,6 +139,9 @@ namespace ChessClassLibrary
         }
     }
 
+    /// <summary>
+    /// Is responsible for all operations on Pieces or empty fields.
+    /// </summary>
     public interface IPieceManager
     {
         /// <summary>
@@ -123,28 +153,31 @@ namespace ChessClassLibrary
         /// </summary>
         PieceTypes Type { get; }
         /// <summary>
-        /// Gets piece X position.
+        /// Gets piece Horizontal position.
         /// </summary>
         int PieceXPosition { get; }
         /// <summary>
-        /// Gets piece Y position.
+        /// Gets piece Vertical position.
         /// </summary>
         int PieceYPosition { get; }
         /// <summary>
         /// Checks whether Piece can be moved to given position.
         /// </summary>
-        /// <param name="x">X coordinate.</param>
-        /// <param name="y">Y coordinate</param>
+        /// <param name="x">Horizontal coordinate.</param>
+        /// <param name="y">Vertical coordinate.</param>
         /// <returns></returns>
         bool canMoveTo(int x, int y);
         /// <summary>
         /// Moves Piece to given position.
         /// </summary>
-        /// <param name="x">X coordinate.</param>
-        /// <param name="y">Y coordinate</param>
+        /// <param name="x">Horizontal coordinate.</param>
+        /// <param name="y">Vertical coordinate.</param>
         void moveTo(int x, int y);
     }
 
+    /// <summary>
+    /// Class responsible for operations on non nullable Piece.
+    /// </summary>
     public class PieceManager: IPieceManager
     {
         private Piece piece;
@@ -208,7 +241,7 @@ namespace ChessClassLibrary
         }
 
         /// <summary>
-        /// Gets piece X position.
+        /// Gets piece Horizontal position.
         /// </summary>
         public int PieceXPosition
         {
@@ -216,7 +249,7 @@ namespace ChessClassLibrary
         }
 
         /// <summary>
-        /// Gets piece Y position.
+        /// Gets piece Vertical position.
         /// </summary>
         public int PieceYPosition
         {
@@ -226,8 +259,8 @@ namespace ChessClassLibrary
         /// <summary>
         /// Checks whether Piece can be moved to given position.
         /// </summary>
-        /// <param name="x">X coordinate.</param>
-        /// <param name="y">Y coordinate</param>
+        /// <param name="x">Horizontal coordinate.</param>
+        /// <param name="y">Vertical coordinate.</param>
         /// <returns></returns>
         public bool canMoveTo(int x, int y)
         {
@@ -245,8 +278,8 @@ namespace ChessClassLibrary
         /// <summary>
         /// Moves Piece to given position.
         /// </summary>
-        /// <param name="x">X coordinate.</param>
-        /// <param name="y">Y coordinate</param>
+        /// <param name="x">Horizontal coordinate.</param>
+        /// <param name="y">Vertical coordinate.</param>
         public void moveTo(int x, int y)
         {
             if (game.GameState == GameStates.blackWin || game.GameState == GameStates.whiteWin)
@@ -261,11 +294,16 @@ namespace ChessClassLibrary
         }
     }
 
+    /// <summary>
+    /// Class responsible for operations on empty field.
+    /// </summary>
     public class EmptyPieceManager: IPieceManager
     {
         private int x;
         private int y;
         private Game game;
+        /// <param name="x">Horizontal coordinate.</param>
+        /// <param name="y">Vertical coordinate.</param>
         public EmptyPieceManager(int x, int y, Game game)
         {
             this.x = x;
@@ -296,7 +334,7 @@ namespace ChessClassLibrary
         }
 
         /// <summary>
-        /// Gets piece X position.
+        /// Gets piece Horizontal position.
         /// </summary>
         public int PieceXPosition
         {
@@ -304,7 +342,7 @@ namespace ChessClassLibrary
         }
 
         /// <summary>
-        /// Gets piece Y position.
+        /// Gets piece Vertical position.
         /// </summary>
         public int PieceYPosition
         {
@@ -314,8 +352,8 @@ namespace ChessClassLibrary
         /// <summary>
         /// Checks whether Piece can be moved to given position.
         /// </summary>
-        /// <param name="x">X coordinate.</param>
-        /// <param name="y">Y coordinate</param>
+        /// <param name="x">Horizontal coordinate.</param>
+        /// <param name="y">Vertical coordinate.</param>
         /// <returns></returns>
         public bool canMoveTo(int x, int y)
         {
@@ -325,14 +363,17 @@ namespace ChessClassLibrary
         /// <summary>
         /// Moves Piece to given position.
         /// </summary>
-        /// <param name="x">X coordinate.</param>
-        /// <param name="y">Y coordinate</param>
+        /// <param name="x">Horizontal coordinate.</param>
+        /// <param name="y">Vertical coordinate.</param>
         public void moveTo(int x, int y)
         {
             throw new Exception("Cannot move not existed Piece.");
         }
     }
 
+    /// <summary>
+    /// Interface which enables user to communicate with game.
+    /// </summary>
     public interface UserGame
     {
         /// <summary>
@@ -351,20 +392,32 @@ namespace ChessClassLibrary
         Players PlayerTurn { get; }
     }
 
+    /// <summary>
+    /// Main class. Controls subclasses.
+    /// </summary>
     public class Game: UserGame
     {
         private BoardManager board;
         private GameStates gameState;
         private Players playerTurn;
 
+        /// <summary>
+        /// Gets board manager.
+        /// </summary>
         public BoardManager Board
         {
             get { return board; }
         }
+        /// <summary>
+        /// Gets current game state.
+        /// </summary>
         public GameStates GameState
         {
             get { return gameState; }
         }
+        /// <summary>
+        /// Gets current playing player.
+        /// </summary>
         public Players PlayerTurn
         {
             get { return playerTurn; }
@@ -377,6 +430,9 @@ namespace ChessClassLibrary
             playerTurn = Players.WhitePlayer;
         }
 
+        /// <summary>
+        /// Change current playing player.
+        /// </summary>
         public void AnotherPlayerTurn()
         {
             if (PlayerTurn == Players.WhitePlayer)
@@ -385,6 +441,9 @@ namespace ChessClassLibrary
                 playerTurn = Players.WhitePlayer;
         }
 
+        /// <summary>
+        /// Updates state.
+        /// </summary>
         public void UpdateState()
         {
             gameState = board.GetState();

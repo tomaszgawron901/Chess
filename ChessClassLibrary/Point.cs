@@ -12,14 +12,14 @@ namespace ChessClassLibrary
         private int y;
 
         /// <summary>
-        /// Returns x coordinate.
+        /// Returns horizontal coordinate.
         /// </summary>
         public int X
         {
             get { return x; }
         }
         /// <summary>
-        /// Returns y coordinate.
+        /// Returns vertical coordinate.
         /// </summary>
         public int Y
         {

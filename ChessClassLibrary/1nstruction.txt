@@ -1,5 +1,5 @@
 ﻿1.	Rozpoczęcie gry.
-Aby rozpocząć grę po prostu tworzysz nowy obiekt Game.
+Aby rozpocząć grę po prostu tworzysz nowy obiekt Game (lub UserGame).
 2.	Pobieranie figur z planszy.
 (Game.Board.GetPiece) --> zwraca PieceManager
 3.	Poruszanie figurami.
