@@ -90,6 +90,25 @@ namespace ChessClassLibrary
             this.board = board;
         }
 
+
+        /// <summary>
+        /// Returns White King peice manager.
+        /// </summary>
+        /// <returns></returns>
+        public PieceManager getWhiteKing()
+        {
+            return new PieceManager(board.WhiteKing, game);
+        }
+
+        /// <summary>
+        /// Returns Black King piece manager.
+        /// </summary>
+        /// <returns></returns>
+        public PieceManager getBlackKing()
+        {
+            return new PieceManager(board.BlackKing, game);
+        }
+
         /// <summary>
         /// Gets the width of the board.
         /// </summary>
