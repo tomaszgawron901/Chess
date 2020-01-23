@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.newGameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newGameOption = new System.Windows.Forms.ToolStripMenuItem();
@@ -55,7 +56,7 @@
             // newGameOption
             // 
             this.newGameOption.Name = "newGameOption";
-            this.newGameOption.Size = new System.Drawing.Size(180, 22);
+            this.newGameOption.Size = new System.Drawing.Size(132, 22);
             this.newGameOption.Text = "New Game";
             this.newGameOption.Click += new System.EventHandler(this.newGameOption_Click);
             // 
@@ -66,6 +67,7 @@
             this.ClientSize = new System.Drawing.Size(800, 825);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.Name = "Form1";
