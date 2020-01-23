@@ -15,67 +15,13 @@
     {
         "Entry"
         {
-        "MsmKey" = "8:_050E643F1E5442E38A7507FC667C17E2"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_08F065D0DDE4E10160F6E63EF0D8867D"
         "OwnerKey" = "8:_ACCD86E4301746B19A8FBFBAA1D0CD55"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_0ECFA495D0D14305AA76EA30B596D7F3"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_1AC295C1B0564BCDB1191FFD555AC28B"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_3D46541936314153AD9E23B334DB005A"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_505457F365D64330B287DA0F79516C62"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_651C6829AD304E8DBA1798FDD90B9329"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_95CBD33E9337420BB39F654538552297"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_9E70F9F9C07848B1A901E81C5A0D821D"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_ACCD86E4301746B19A8FBFBAA1D0CD55"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_B078AC1E14264C739DD02C10CC794528"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -87,38 +33,8 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_BA0E87843F824077B73B60B936C67B76"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_D69DA6567AC144A2997B442CF6ED0DA8"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_F3C02B6CCB11A38522062AB692D93F91"
         "OwnerKey" = "8:_ACCD86E4301746B19A8FBFBAA1D0CD55"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F8949E5A0F384FAB96E686DE4452E484"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_F92A1701792B4F36BA826C2561F42985"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_08F065D0DDE4E10160F6E63EF0D8867D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -131,6 +47,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_F3C02B6CCB11A38522062AB692D93F91"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_08F065D0DDE4E10160F6E63EF0D8867D"
         "MsmSig" = "8:_UNDEFINED"
         }
     }
@@ -151,6 +73,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -167,6 +97,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
     }
     "Deployable"
@@ -196,26 +134,6 @@
         }
         "File"
         {
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_050E643F1E5442E38A7507FC667C17E2"
-            {
-            "SourcePath" = "8:..\\ChessApplication\\bin\\Debug\\ChessPieceImages\\BlackKnight.png"
-            "TargetName" = "8:BlackKnight.png"
-            "Tag" = "8:"
-            "Folder" = "8:_15E05EED4DEC4DA9AC809F05CE652E85"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_08F065D0DDE4E10160F6E63EF0D8867D"
             {
             "AssemblyRegister" = "3:1"
@@ -247,212 +165,12 @@
             "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_0ECFA495D0D14305AA76EA30B596D7F3"
-            {
-            "SourcePath" = "8:..\\ChessApplication\\bin\\Debug\\ChessPieceImages\\WhitePawn.png"
-            "TargetName" = "8:WhitePawn.png"
-            "Tag" = "8:"
-            "Folder" = "8:_15E05EED4DEC4DA9AC809F05CE652E85"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_1AC295C1B0564BCDB1191FFD555AC28B"
-            {
-            "SourcePath" = "8:..\\ChessApplication\\bin\\Debug\\ChessPieceImages\\WhiteKnight.png"
-            "TargetName" = "8:WhiteKnight.png"
-            "Tag" = "8:"
-            "Folder" = "8:_15E05EED4DEC4DA9AC809F05CE652E85"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_3D46541936314153AD9E23B334DB005A"
-            {
-            "SourcePath" = "8:..\\ChessApplication\\bin\\Debug\\ChessPieceImages\\WhiteRook.png"
-            "TargetName" = "8:WhiteRook.png"
-            "Tag" = "8:"
-            "Folder" = "8:_15E05EED4DEC4DA9AC809F05CE652E85"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_505457F365D64330B287DA0F79516C62"
-            {
-            "SourcePath" = "8:..\\ChessApplication\\bin\\Debug\\ChessPieceImages\\BlackPawn.png"
-            "TargetName" = "8:BlackPawn.png"
-            "Tag" = "8:"
-            "Folder" = "8:_15E05EED4DEC4DA9AC809F05CE652E85"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_651C6829AD304E8DBA1798FDD90B9329"
-            {
-            "SourcePath" = "8:..\\ChessApplication\\bin\\Debug\\ChessPieceImages\\WhiteBishop.png"
-            "TargetName" = "8:WhiteBishop.png"
-            "Tag" = "8:"
-            "Folder" = "8:_15E05EED4DEC4DA9AC809F05CE652E85"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_95CBD33E9337420BB39F654538552297"
-            {
-            "SourcePath" = "8:..\\ChessApplication\\bin\\Debug\\ChessPieceImages\\Info.txt"
-            "TargetName" = "8:Info.txt"
-            "Tag" = "8:"
-            "Folder" = "8:_15E05EED4DEC4DA9AC809F05CE652E85"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_9E70F9F9C07848B1A901E81C5A0D821D"
-            {
-            "SourcePath" = "8:..\\ChessApplication\\bin\\Debug\\ChessPieceImages\\BlackQueen.png"
-            "TargetName" = "8:BlackQueen.png"
-            "Tag" = "8:"
-            "Folder" = "8:_15E05EED4DEC4DA9AC809F05CE652E85"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B078AC1E14264C739DD02C10CC794528"
-            {
-            "SourcePath" = "8:..\\ChessApplication\\bin\\Debug\\ChessPieceImages\\BlackBishop.png"
-            "TargetName" = "8:BlackBishop.png"
-            "Tag" = "8:"
-            "Folder" = "8:_15E05EED4DEC4DA9AC809F05CE652E85"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B6B5273AB38E40C7BBCA55A7A1DCFDDB"
             {
             "SourcePath" = "8:C:\\Users\\Tomek\\Desktop\\icon.ico"
             "TargetName" = "8:icon.ico"
             "Tag" = "8:"
             "Folder" = "8:_8BC2DB8BE31246F3B7D2030BA7BBC5E5"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BA0E87843F824077B73B60B936C67B76"
-            {
-            "SourcePath" = "8:..\\ChessApplication\\bin\\Debug\\ChessPieceImages\\BlackRook.png"
-            "TargetName" = "8:BlackRook.png"
-            "Tag" = "8:"
-            "Folder" = "8:_15E05EED4DEC4DA9AC809F05CE652E85"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_D69DA6567AC144A2997B442CF6ED0DA8"
-            {
-            "SourcePath" = "8:..\\ChessApplication\\bin\\Debug\\ChessPieceImages\\WhiteKing.png"
-            "TargetName" = "8:WhiteKing.png"
-            "Tag" = "8:"
-            "Folder" = "8:_15E05EED4DEC4DA9AC809F05CE652E85"
             "Condition" = "8:"
             "Transitive" = "11:FALSE"
             "Vital" = "11:TRUE"
@@ -496,46 +214,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F8949E5A0F384FAB96E686DE4452E484"
-            {
-            "SourcePath" = "8:..\\ChessApplication\\bin\\Debug\\ChessPieceImages\\WhiteQueen.png"
-            "TargetName" = "8:WhiteQueen.png"
-            "Tag" = "8:"
-            "Folder" = "8:_15E05EED4DEC4DA9AC809F05CE652E85"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_F92A1701792B4F36BA826C2561F42985"
-            {
-            "SourcePath" = "8:..\\ChessApplication\\bin\\Debug\\ChessPieceImages\\BlackKing.png"
-            "TargetName" = "8:BlackKing.png"
-            "Tag" = "8:"
-            "Folder" = "8:_15E05EED4DEC4DA9AC809F05CE652E85"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
         }
@@ -1141,7 +819,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_ACCD86E4301746B19A8FBFBAA1D0CD55"
             {
-            "SourcePath" = "8:..\\ChessApplication\\obj\\Debug\\ChessApplication.exe"
+            "SourcePath" = "8:..\\ChessApplication\\obj\\Release\\ChessApplication.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_8BC2DB8BE31246F3B7D2030BA7BBC5E5"
