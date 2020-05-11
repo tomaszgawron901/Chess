@@ -14,7 +14,6 @@ namespace ChessApplication
     public partial class Form1 : Form
     {
         static private int fieldSize = 100;
-        static private int boardWidth = 800;
         static private int boardHeight = 800;
 
         private Game game;

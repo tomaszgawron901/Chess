@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessClassLibraryTests", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessApplication", "ChessApplication\ChessApplication.csproj", "{0C24BC4A-281D-4567-88CC-1B1626D88A0D}"
 EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ChessAppSetup", "ChessAppSetup\ChessAppSetup.vdproj", "{9996F9C4-9A3A-4739-B4AE-A425DFAF9888}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,8 @@ Global
 		{0C24BC4A-281D-4567-88CC-1B1626D88A0D}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{0C24BC4A-281D-4567-88CC-1B1626D88A0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C24BC4A-281D-4567-88CC-1B1626D88A0D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9996F9C4-9A3A-4739-B4AE-A425DFAF9888}.Debug|Any CPU.ActiveCfg = Debug
+		{9996F9C4-9A3A-4739-B4AE-A425DFAF9888}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
