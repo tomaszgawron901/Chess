@@ -3,11 +3,12 @@
 ## **Folders Structure**
 
 - **ChessAppSetup** - Setup folder (all you need to create .exe/msi setup files).
-- **ChessApplication** - User interface.
+- **ChessApplication** - WPF Desktop application.
+- **ChessWebApp** - Blazor WebSite application.
 - **ChessClassLibrary** - Classes responsible for logic in game.
 - **ChessClassLibraryTests** - Unit tests for all classes in **ChessClassLibrary**.
 
-## **Instalation**
+## **Desktop App Instalation**
 - **First of all you have to open solution file and build it.**
 - To install application go to ChessAppSetup/Debug and open 'ChessAppSetup.msi'/'Setup.exe', or in Solution Explorer right-click on ChessAppSetup and click 'install'.
 
