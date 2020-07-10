@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessApplication", "ChessAp
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "ChessAppSetup", "ChessAppSetup\ChessAppSetup.vdproj", "{9996F9C4-9A3A-4739-B4AE-A425DFAF9888}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChessWebApp", "ChessWebApp\ChessWebApp.csproj", "{0302EB87-55B3-4BF3-BAE4-61D72F1363EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChessWebApp", "ChessWebApp\ChessWebApp.csproj", "{0302EB87-55B3-4BF3-BAE4-61D72F1363EC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

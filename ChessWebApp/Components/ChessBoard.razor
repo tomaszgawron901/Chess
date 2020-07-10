@@ -21,7 +21,14 @@
 </div>
 
 @code {
-    public UserGame game = new Game();
+    private UserGame game;
+    [Parameter]
+    public UserGame Game { set{
+            game = value;
+            //fields = new Field[game.Board.BoardWidth, game.Board.BoardHeight];
+        }
+    }
+
     public IPieceManager selectedPiece = null;
     private Field[,] fields { get; set; } = new Field[8, 8];
 
@@ -74,7 +81,7 @@
     {
         return delegate ()
         {
-            return game.Board.GetPiece(x, y);
+            return this.game.Board.GetPiece(x, y);
         };
     }
 
@@ -118,8 +125,6 @@
             f.BorderColor = "";
         };
     }
-
-
 
     public void Update()
     {
