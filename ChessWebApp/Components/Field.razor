@@ -1,0 +1,74 @@
+﻿@using ChessClassLibrary
+
+    <div class="boardField" style="background-color: @BackgroundColor; border-color: @BorderColor;" @onclick=@( ()=>OnClick(this) ) @onmouseover=@(() => OnOver(this)) @onmouseout=@(() => OnOut(this))>
+        @if (Piece.Type != PieceTypes.Empty)
+        {
+            <img src=@imgs[Piece.Owner][Piece.Type] asp-append-version="true" style="width: 100px; height: 100px" draggable="false"/>
+        }
+
+    </div>
+
+@code {
+    private static Dictionary<Players, Dictionary<PieceTypes, string>> loadImages()
+    {
+        Dictionary<PieceTypes, string> whitePieces = new Dictionary<PieceTypes, string>();
+        whitePieces.Add(PieceTypes.King, "Images\\WhiteKing.png");
+        whitePieces.Add(PieceTypes.Queen, "Images\\WhiteQueen.png");
+        whitePieces.Add(PieceTypes.Rook, "Images\\WhiteRook.png");
+        whitePieces.Add(PieceTypes.Bishop, "Images\\WhiteBishop.png");
+        whitePieces.Add(PieceTypes.Knight, "Images\\WhiteKnight.png");
+        whitePieces.Add(PieceTypes.Pawn, "Images\\WhitePawn.png");
+
+        Dictionary<PieceTypes, string> blackPieces = new Dictionary<PieceTypes, string>();
+        blackPieces.Add(PieceTypes.King, "Images\\BlackKing.png");
+        blackPieces.Add(PieceTypes.Queen, "Images\\BlackQueen.png");
+        blackPieces.Add(PieceTypes.Rook, "Images\\BlackRook.png");
+        blackPieces.Add(PieceTypes.Bishop, "Images\\BlackBishop.png");
+        blackPieces.Add(PieceTypes.Knight, "Images\\BlackKnight.png");
+        blackPieces.Add(PieceTypes.Pawn, "Images\\BlackPawn.png");
+
+        var output = new Dictionary<Players, Dictionary<PieceTypes, string>>();
+        output.Add(Players.WhitePlayer, whitePieces);
+        output.Add(Players.BlackPlayer, blackPieces);
+        return output;
+    }
+
+    private static Dictionary<Players, Dictionary<PieceTypes, string>> imgs = loadImages();
+
+
+    [Parameter]
+    public string BackgroundColor { get; set; }
+
+    [Parameter]
+    public string BorderColor { get; set; }
+
+    [Parameter]
+    public Func<IPieceManager> PieceUpdator {
+        set {
+            pieceUpdator = value;
+            Update();
+        }
+    }
+
+    public void Update()
+    {
+        if (pieceUpdator != null)
+        {
+            Piece = pieceUpdator();
+        }
+        this.StateHasChanged();
+    }
+
+    private Func<IPieceManager> pieceUpdator;
+
+    private IPieceManager Piece;
+
+    [Parameter]
+    public Action<Field> OnClick { get; set; }
+
+    [Parameter]
+    public Action<Field> OnOver { get; set; }
+
+    [Parameter]
+    public Action<Field> OnOut { get; set; }
+}

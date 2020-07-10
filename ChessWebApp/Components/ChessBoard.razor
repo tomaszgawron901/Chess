@@ -1,0 +1,131 @@
+﻿@using ChessWebApp.Components
+@using ChessClassLibrary
+
+<div class="board">
+    @for (int height = game.Board.BoardHeight - 1; height >= 0; height--)
+    {
+        <div class="boardRow">
+            @for (int width = 0; width < game.Board.BoardWidth; width++)
+            {
+                string color = "PapayaWhip";
+                @if ((height + width) % 2 == 0)
+                {
+                    color = "SaddleBrown";
+                }
+                int h = height;
+                int w = width;
+                <Field @ref=@fields[w,h] BackgroundColor=@color OnClick=@GetOnFieldClickAction(width, height) PieceUpdator=@GetPieceUpdator(width, height) OnOver=@GetOnOverAction(w, h) OnOut=@GetOnOutAction(w, h)></Field>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    public UserGame game = new Game();
+    public IPieceManager selectedPiece = null;
+    private Field[,] fields { get; set; } = new Field[8, 8];
+
+
+    protected Action<Field> GetOnFieldClickAction(int x, int y)
+    {
+        return delegate (Field f)
+        {
+            if (game is null || game.GameState == GameStates.blackWin || game.GameState == GameStates.whiteWin)
+                return;
+
+            if (selectedPiece is null)
+            {
+                var pm = game.Board.GetPiece(x, y);
+                if (pm.Owner == game.PlayerTurn)
+                {
+                    selectedPiece = pm;
+                    f.BorderColor = "black";
+                }
+
+            }
+            else
+            {
+                fields[selectedPiece.PieceXPosition, selectedPiece.PieceYPosition].BorderColor = "";
+                fields[selectedPiece.PieceXPosition, selectedPiece.PieceYPosition].Update();
+                f.BorderColor = "";
+                if (selectedPiece.canMoveTo(x, y))
+                {
+
+                    selectedPiece.moveTo(x, y);
+                    if (game.GameState == GameStates.blackWin)
+                    {
+                        var king = game.Board.getWhiteKing();
+                        fields[king.PieceXPosition, king.PieceYPosition].BackgroundColor = "red";
+                    }
+                    else if (game.GameState == GameStates.whiteWin)
+                    {
+                        var king = game.Board.getBlackKing();
+                        fields[king.PieceXPosition, king.PieceYPosition].BackgroundColor = "red";
+                    }
+                    Update();
+                }
+                selectedPiece = null;
+
+            }
+        };
+    }
+
+    private Func<IPieceManager> GetPieceUpdator(int x, int y)
+    {
+        return delegate ()
+        {
+            return game.Board.GetPiece(x, y);
+        };
+    }
+
+    protected Action<Field> GetOnOverAction(int x, int y)
+    {
+        return delegate (Field f)
+        {
+            if (game is null || game.GameState == GameStates.blackWin || game.GameState == GameStates.whiteWin)
+                return;
+
+            if (selectedPiece is null)
+                return;
+
+            if (selectedPiece.PieceXPosition == x && selectedPiece.PieceYPosition == y)
+                return;
+
+            if (selectedPiece.canMoveTo(x, y))
+            {
+                f.BorderColor = "GreenYellow";
+            }
+            else
+            {
+                f.BorderColor = "red";
+            }
+        };
+    }
+
+    protected Action<Field> GetOnOutAction(int x, int y)
+    {
+        return delegate (Field f)
+        {
+            if (game is null || game.GameState == GameStates.blackWin || game.GameState == GameStates.whiteWin)
+                return;
+
+            if (selectedPiece is null)
+                return;
+
+            if (selectedPiece.PieceXPosition == x && selectedPiece.PieceYPosition == y)
+                return;
+
+            f.BorderColor = "";
+        };
+    }
+
+
+
+    public void Update()
+    {
+        foreach(Field field in fields)
+        {
+            field.Update();
+        }
+    }
+}
